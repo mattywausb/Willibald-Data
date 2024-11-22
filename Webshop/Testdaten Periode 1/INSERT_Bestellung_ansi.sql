@@ -795,6 +795,7 @@ INSERT INTO willibald_shop_p1.Bestellung (BestellungID, KundeID, AllgLieferAdrID
 INSERT INTO willibald_shop_p1.Bestellung (BestellungID, KundeID, AllgLieferAdrID, Bestelldatum, Wunschdatum, Rabatt) VALUES	 ('795', '298', '105', '2022-03-11', '2022-03-11', '0.00');
 INSERT INTO willibald_shop_p1.Bestellung (BestellungID, KundeID, AllgLieferAdrID, Bestelldatum, Wunschdatum, Rabatt) VALUES	 ('796', '298', '324', '2022-03-11', '2022-03-20', '3.00');
 INSERT INTO willibald_shop_p1.Bestellung (BestellungID, KundeID, AllgLieferAdrID, Bestelldatum, Wunschdatum, Rabatt) VALUES	 ('797', '299', '246', '2022-03-11', '2022-03-23', '3.00');
-INSERT INTO willibald_shop_p1.Bestellung (BestellungID, KundeID, AllgLieferAdrID, Bestelldatum, Wunschdatum, Rabatt) VALUES	 ('798', '299', '411', '2022-03-11', '2022-03-14', '1.50');
+INSERT INTO willibald_shop_p1.Bestellung (BestellungID, KundeID, AllgLieferAdrID, Bestelldatum, Wunschdatum, Rabatt) VALUES	 ('798', '899', '411', '2022-03-11', '2022-03-14', '1.50');
 INSERT INTO willibald_shop_p1.Bestellung (BestellungID, KundeID, AllgLieferAdrID, Bestelldatum, Wunschdatum, Rabatt) VALUES	 ('799', '300', '337', '2022-03-11', '2022-03-24', '3.00');
 INSERT INTO willibald_shop_p1.Bestellung (BestellungID, KundeID, AllgLieferAdrID, Bestelldatum, Wunschdatum, Rabatt) VALUES	 ('800', '300', '600', '2022-03-11', '2022-03-11', '0.00');
+INSERT INTO willibald_shop_p1.Bestellung (BestellungID, KundeID, AllgLieferAdrID, Bestelldatum, Wunschdatum, Rabatt) VALUES	 ('801', '899', '411', '2021-03-11', '2021-03-14', '1.50');
