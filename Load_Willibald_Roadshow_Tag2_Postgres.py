@@ -8,7 +8,7 @@ host = 'your_host'
 database = 'your_database'
 user = 'your_username'
 password = 'your_password'
-schema = 'WILLIBALD_SHOP_P1'
+schema = 'WILLIBALD_ROADSHOW_T2'
 
 #pip install psycopg2
 
@@ -33,8 +33,7 @@ def execute_sql_file(file_path):
 
 # SQL-Skripte ausführen
 sql_files = [
-    '/willibald-data/Webshop/Testdaten Periode 1/_Testdaten_DDL_1_ANSI.sql',
-    '/willibald-data/Webshop/Testdaten Periode 1/Dubletten_ANSI.sql'
+    '/willibald-data/Roadshow/Tag 2/_Roadshow_DDL_2_ANSI.sql'
 ]
 
 for sql_file in sql_files:
@@ -42,18 +41,7 @@ for sql_file in sql_files:
 
 # Liste der CSV-Dateien
 csv_files = [
-    '/willibald-data/Webshop/Testdaten Periode 1/bestellung.csv',
-    '/willibald-data/Webshop/Testdaten Periode 1/href_termintreue.csv',
-    '/willibald-data/Webshop/Testdaten Periode 1/kunde.csv',
-    '/willibald-data/Webshop/Testdaten Periode 1/lieferadresse.csv',
-    '/willibald-data/Webshop/Testdaten Periode 1/lieferdienst.csv',
-    '/willibald-data/Webshop/Testdaten Periode 1/Lieferung.csv',
-    '/willibald-data/Webshop/Testdaten Periode 1/postition.csv',
-    '/willibald-data/Webshop/Testdaten Periode 1/produkt.csv',
-    '/willibald-data/Webshop/Testdaten Periode 1/produktkategorie.csv',
-    '/willibald-data/Webshop/Testdaten Periode 1/ref_produkt_typ.csv',
-    '/willibald-data/Webshop/Testdaten Periode 1/vereinspartner.csv',
-    '/willibald-data/Webshop/Testdaten Periode 1/wohnort.csv'
+    '/willibald-data/Roadshow/Tag 2/RS_Bestellung.csv'
 ]
 
 # Funktion zum Laden einer CSV-Datei in PostgreSQL
