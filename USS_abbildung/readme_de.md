@@ -32,12 +32,22 @@ Das BI Werkzeug muss dazu folgendes Unterstützen:
 - Daten aus unterschiedlichen Zeilen mit gleichen Attributwerten "ineinenanderschieben"
 
 ## USS für Willibald
-![fig1](./img/USS_fo_willibald.drawio.png)
+![fig1](./img/USS_for_willibald.drawio.png)
 
 
 
-## Fallbeispiele für USS Features im Willibald Modell
+## Fallbeispiele im Willibald Modell für das USS verhalten 
 
+### "Loss of Data"
+Loss of Data beschreibt den Umstand, dass bei einem inner Join, nur die Elemente im Ergebnis bleiben, die in beiden Tabellen
+den Joinkriterien entsprechen.
 
+In Willibald ist dies der Fall bei:
+- Produkte, die von keiner Bestellposition angesprochen werden
+- Lieferadressen, die von keine Bestellung angesprochen werden
+- Lieferdienste, die von keiner Lieferung angesprochen werden
+- Kunden, für die keine Bestellung exisitert
+- Bestellung, für die kein Kunde existiert 
 
+### "Fan Trap" / ""
 
