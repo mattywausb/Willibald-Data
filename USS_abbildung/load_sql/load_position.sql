@@ -4,7 +4,7 @@
 delete from uss_willibald.bridge_willibald 
 where stage ='position';
 
-insert into uss_willibald.bridge_willibald (stage,"_key_position","_key_bestellung","_key_produkt" ,"_key_lieferadresse") 
+insert into uss_willibald.bridge_willibald (stage,_key_position,_key_bestellung,_key_produkt ,_key_lieferadresse) 
 	select distinct 'position'
 		, posid 
 		, bestellungid 
@@ -19,7 +19,7 @@ insert into uss_willibald.bridge_willibald (stage,"_key_position","_key_bestellu
 truncate table uss_willibald.position;
 
 INSERT INTO uss_willibald.position
-( "_key_position", posid, menge, preis)
+( _key_position, posid, menge, preis)
 select 
 	posid,
 	posid,

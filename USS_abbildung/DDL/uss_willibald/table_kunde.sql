@@ -5,7 +5,7 @@ CREATE TABLE uss_willibald.kunde (
 	_key_kunde  varchar(13) NOT NULL,
 	kundeid  varchar(13),
 	vorname varchar(128) NOT NULL,
-	"name" varchar(128) NOT NULL,
+	name varchar(128) NOT NULL,
 	geschlecht  varchar(1) NULL,
 	geburtsdatum date NOT NULL
 );

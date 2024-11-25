@@ -6,7 +6,7 @@ CREATE TABLE uss_willibald.produkt (
 	produktid number(20) NOT NULL,
 	bezeichnung varchar(512) NOT NULL,
 	umfang varchar(128) NOT NULL,
-	pflanztyp number(20) NOT NULL,
+	pflanztyp varchar(128) NOT NULL,
 	preis numeric(5, 2) NOT NULL,
 	pflanzort varchar(128) NOT NULL,
 	pflanzabstand varchar(128) NOT NULL,

@@ -4,7 +4,7 @@
 delete from uss_willibald.bridge_willibald 
 where stage ='kunde';
 
-insert into uss_willibald.bridge_willibald (stage,"_key_kunde","_key_vereinspartner") 
+insert into uss_willibald.bridge_willibald (stage,_key_kunde,_key_vereinspartner) 
 	select distinct 'kunde'
 		, kundeid 
 		,vereinspartnerid 
@@ -14,15 +14,15 @@ insert into uss_willibald.bridge_willibald (stage,"_key_kunde","_key_vereinspart
  * select * from 	 uss_willibald.bridge_willibald
  */
 
-truncate table uss_willibald.kunde
+truncate table uss_willibald.kunde;
 
 INSERT INTO uss_willibald.kunde
-("_key_kunde", kundeid, vorname, "name", geschlecht, geburtsdatum)
+(_key_kunde, kundeid, vorname, name, geschlecht, geburtsdatum)
 select 
 	kundeid ,
 	kundeid ,
 	vorname ,
-	"name" ,
+	name ,
 	geschlecht ,
 	geburtsdatum 
 from  willibald_shop_p1.kunde;
