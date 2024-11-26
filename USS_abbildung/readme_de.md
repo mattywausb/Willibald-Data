@@ -47,7 +47,7 @@ hinzugefügt. Diese Tabellen sind im Diagamm mit einem * gekennzeichnet.
 Loss of Data beschreibt den Umstand, dass bei einem inner Join, nur die Elemente im Ergebnis bleiben, die in beiden Tabellen
 den Joinkriterien entsprechen.
 
-In Willibald Datenbestand ist dies der Fall bei:
+Im Willibald Datenbestand ist dies der Fall bei:
 - Produkte, die von keiner Bestellposition angesprochen werden
 - Lieferadressen, die von keine Bestellung angesprochen werden
 - Lieferdienste, die von keiner Lieferung angesprochen werden
@@ -61,5 +61,13 @@ Datensätze in der Ergebnismenge ankommen.
 ### "Fan Trap" 
 Die "Fan Trap" kann überall dort auftreten, wo:
 - zwei oder mehr Tabellen in beziehung stehen
-- diese Tabellen aggregierbaren Werten mit unterschiedlicher Granularität beinhalten
+- diese Tabellen aggregierbaren Werte mit unterschiedlicher Granularität beinhalten
+
+Im Willibald Datenbestand ist dies der Fall bei:
+- Bestellposition und Bestellung
+- Lieferung und Bestellposition
+- Bestellposition und Produkt
+
+In der USS müssen für eine korrekte Behandlung die aggregierbaren Felder von den einfachen Attributen in eine separate
+Tabellen getrennt werden.
 
