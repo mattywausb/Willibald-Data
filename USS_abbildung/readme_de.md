@@ -36,18 +36,30 @@ Das BI Werkzeug muss dazu folgendes Unterstützen:
 
 
 
-## Fallbeispiele im Willibald Modell für das USS verhalten 
+## Fallbeispiele im Willibald Modell für das USS Verständnis
+Für die Fallbeispiele ist es hilfreich, das Willibald Modell in der ODM Notation zu modellieren. Um alle 
+USS spezifischen Aspekte zu berühren, wurden einigen Willibald Tabellen weitere Spalten mit aggregierbaren Werten 
+hinzugefügt. Diese Tabellen sind im Diagamm mit einem * gekennzeichnet.
+
+![fig](./img/ODM_of_willibald.drawio.png)
 
 ### "Loss of Data"
 Loss of Data beschreibt den Umstand, dass bei einem inner Join, nur die Elemente im Ergebnis bleiben, die in beiden Tabellen
 den Joinkriterien entsprechen.
 
-In Willibald ist dies der Fall bei:
+In Willibald Datenbestand ist dies der Fall bei:
 - Produkte, die von keiner Bestellposition angesprochen werden
 - Lieferadressen, die von keine Bestellung angesprochen werden
 - Lieferdienste, die von keiner Lieferung angesprochen werden
 - Kunden, für die keine Bestellung exisitert
 - Bestellung, für die kein Kunde existiert 
 
-### "Fan Trap" / ""
+Die USS bietet in der Bridge aufgrund ihrere Funktionsprinzips für alle Elemente einer Tabelle mindestens einen Datensatz an,
+da dieser aus der Quelle selbst erzeugt wird. Beim Join der Daten mit der Bridge hängt es einzig  den "Left" Joins ab, ob diese
+Datensätze in der Ergebnismenge ankommen.
+
+### "Fan Trap" 
+Die "Fan Trap" kann überall dort auftreten, wo:
+- zwei oder mehr Tabellen in beziehung stehen
+- diese Tabellen aggregierbaren Werten mit unterschiedlicher Granularität beinhalten
 
