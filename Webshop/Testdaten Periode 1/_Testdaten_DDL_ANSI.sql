@@ -1,13 +1,13 @@
-﻿-- Exported from QuickDBD: https://www.quickdatabasediagrams.com/
+-- Exported from QuickDBD: https://www.quickdatabasediagrams.com/
 -- NOTE! If you have used non-SQL datatypes in your design, you will have to change these here.
 
-SET XACT_ABORT ON;
+--SET XACT_ABORT ON;
 
-BEGIN TRANSACTION QUICKDBD;
+--BEGIN TRANSACTION QUICKDBD;
 
-create schema willibald_webshop_p1;
+--create schema willibald_webshop_p1;
 
-set default schema willibald_webshop_p1;
+--set default schema willibald_webshop_p1;
 
 CREATE TABLE Kunde (
     KundeID CHAR(13) NOT NULL,
@@ -149,4 +149,4 @@ ALTER TABLE Lieferung ADD CONSTRAINT FK_Lieferung_LieferAdrID FOREIGN KEY (Liefe
 
 ALTER TABLE Lieferung ADD CONSTRAINT FK_Lieferung_LieferDienstID FOREIGN KEY (LieferDienstID) REFERENCES LieferDienst (LieferDienstID);
 
-COMMIT TRANSACTION QUICKDBD;
+-- COMMIT TRANSACTION QUICKDBD;

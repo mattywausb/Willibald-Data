@@ -9,25 +9,30 @@ def create_schema(schema_name):
     conn.commit()
     cursor.close()
 
-# Funktion zum Ausführen eines SQL-Skripts
-def execute_sql_file(file_path, schema_name):
-    with open(file_path, 'r') as file:
-        sql = file.read()
+# Funktion zum AusfÃ¼hren mehrerer SQL-Anweisungen
+def execute_sql_commands(sql_commands):
     cursor = conn.cursor()
-    cursor.execute(f"USE SCHEMA {schema_name}")
-    cursor.execute(sql)
-    conn.commit()
-    cursor.close()
+    try:
+        for command in sql_commands:
+            cursor.execute(command)
+        conn.commit()
+    except Exception as e:
+        print(f"Fehler beim AusfÃ¼hren der SQL-Anweisungen: {e}")
+    finally:
+        cursor.close()
 
 # Funktion zum Laden einer CSV-Datei in Snowflake
 def load_csv_to_snowflake(file_path, table_name, schema_name):
+    if not os.path.exists(file_path):
+        print(f"Fehler: Die Datei {file_path} wurde nicht gefunden.")
+        return
     cursor = conn.cursor()
     try:
-        # Erstelle eine temporäre Stage
+        # Erstelle eine temporÃ¤re Stage
         stage_name = f"{table_name}_stage"
         cursor.execute(f"CREATE OR REPLACE TEMPORARY STAGE {stage_name}")
 
-        # Lade die CSV-Datei in die temporäre Stage
+        # Lade die CSV-Datei in die temporÃ¤re Stage
         cursor.execute(f"PUT file://{file_path} @{stage_name}")
 
         # Lade die Daten aus der Stage in die Tabelle
@@ -58,8 +63,8 @@ def create_view(view_name, table_name, source_schema, target_schema):
 
 
 # Konfigurationsdateien laden
-with open('config/config.json', 'r') as file:
-    config = json.load(file)
+with open('config/db_config.json', 'r') as file:
+    db_config = json.load(file)
 
 with open('config/folders_config.json', 'r') as file:
     folders_config = json.load(file)
@@ -68,11 +73,11 @@ with open('config/schemas_config.json', 'r') as file:
     schemas_config = json.load(file)
 
 # Verbindungsinformationen aus der Konfigurationsdatei lesen
-account = config['SNOWFLAKE_ACCOUNT']
-user = config['SNOWFLAKE_USER']
-password = config['SNOWFLAKE_PASSWORD']
-warehouse = config['SNOWFLAKE_WAREHOUSE']
-database = config['SNOWFLAKE_DATABASE']
+account = db_config['SNOWFLAKE_ACCOUNT']
+user = db_config['SNOWFLAKE_USER']
+password = db_config['SNOWFLAKE_PASSWORD']
+warehouse = db_config['SNOWFLAKE_WAREHOUSE']
+database = db_config['SNOWFLAKE_DATABASE']
 
 # Verbindung zu Snowflake herstellen
 conn = snowflake.connector.connect(
@@ -89,7 +94,10 @@ schemas = schemas_config['schemas']
 for schema in schemas:
     create_schema(schema)
 
-# SQL-Skripte und CSV-Dateien für WILLIBALD_WEBSHOP_P1
+
+
+
+# SQL-Skripte und CSV-Dateien fÃ¼r WILLIBALD_WEBSHOP_P1
 sql_files_p1 = [
     os.path.join(folders_config['WEBSHOP_PERIODE_1'], '_Testdaten_DDL_1_ANSI.sql'),
     os.path.join(folders_config['WEBSHOP_PERIODE_1'], 'Dubletten_ANSI.sql')
@@ -102,7 +110,7 @@ csv_files_p1 = [
     os.path.join(folders_config['WEBSHOP_PERIODE_1'], 'lieferadresse.csv'),
     os.path.join(folders_config['WEBSHOP_PERIODE_1'], 'lieferdienst.csv'),
     os.path.join(folders_config['WEBSHOP_PERIODE_1'], 'Lieferung.csv'),
-    os.path.join(folders_config['WEBSHOP_PERIODE_1'], 'postition.csv'),
+    os.path.join(folders_config['WEBSHOP_PERIODE_1'], 'position.csv'),
     os.path.join(folders_config['WEBSHOP_PERIODE_1'], 'produkt.csv'),
     os.path.join(folders_config['WEBSHOP_PERIODE_1'], 'produktkategorie.csv'),
     os.path.join(folders_config['WEBSHOP_PERIODE_1'], 'ref_produkt_typ.csv'),
@@ -111,13 +119,18 @@ csv_files_p1 = [
 ]
 
 for sql_file in sql_files_p1:
-    execute_sql_file(sql_file, 'WILLIBALD_WEBSHOP_P1')
+    with open(sql_file, 'r') as file:
+        sql_commands = file.read().split(';')
+    execute_sql_commands(sql_commands)
 
 for csv_file in csv_files_p1:
     table_name = os.path.splitext(os.path.basename(csv_file))[0]
     load_csv_to_snowflake(csv_file, table_name, 'WILLIBALD_WEBSHOP_P1')
 
-# SQL-Skripte und CSV-Dateien für WILLIBALD_WEBSHOP_P2
+
+
+
+# SQL-Skripte und CSV-Dateien fÃ¼r WILLIBALD_WEBSHOP_P2
 sql_files_p2 = [
     os.path.join(folders_config['WEBSHOP_PERIODE_2'], '_Testdaten_DDL_P2_ANSI.sql')
 ]
@@ -129,7 +142,7 @@ csv_files_p2 = [
     os.path.join(folders_config['WEBSHOP_PERIODE_2'], 'lieferadresse.csv'),
     os.path.join(folders_config['WEBSHOP_PERIODE_2'], 'lieferdienst.csv'),
     os.path.join(folders_config['WEBSHOP_PERIODE_2'], 'Lieferung.csv'),
-    os.path.join(folders_config['WEBSHOP_PERIODE_2'], 'postition.csv'),
+    os.path.join(folders_config['WEBSHOP_PERIODE_2'], 'position.csv'),
     os.path.join(folders_config['WEBSHOP_PERIODE_2'], 'produkt.csv'),
     os.path.join(folders_config['WEBSHOP_PERIODE_2'], 'produktkategorie.csv'),
     os.path.join(folders_config['WEBSHOP_PERIODE_2'], 'vereinspartner.csv'),
@@ -137,13 +150,18 @@ csv_files_p2 = [
 ]
 
 for sql_file in sql_files_p2:
-    execute_sql_file(sql_file, 'WILLIBALD_WEBSHOP_P2')
+    with open(sql_file, 'r') as file:
+        sql_commands = file.read().split(';')
+    execute_sql_commands(sql_commands)
 
 for csv_file in csv_files_p2:
     table_name = os.path.splitext(os.path.basename(csv_file))[0]
     load_csv_to_snowflake(csv_file, table_name, 'WILLIBALD_WEBSHOP_P2')
 
-# SQL-Skripte und CSV-Dateien für WILLIBALD_WEBSHOP_P3
+
+
+
+# SQL-Skripte und CSV-Dateien fÃ¼r WILLIBALD_WEBSHOP_P3
 sql_files_p3 = [
     os.path.join(folders_config['WEBSHOP_PERIODE_3'], '_Testdaten_DDL_P3_ANSI.sql')
 ]
@@ -154,7 +172,7 @@ csv_files_p3 = [
     os.path.join(folders_config['WEBSHOP_PERIODE_3'], 'lieferadresse.csv'),
     os.path.join(folders_config['WEBSHOP_PERIODE_3'], 'lieferdienst.csv'),
     os.path.join(folders_config['WEBSHOP_PERIODE_3'], 'Lieferung.csv'),
-    os.path.join(folders_config['WEBSHOP_PERIODE_3'], 'postition.csv'),
+    os.path.join(folders_config['WEBSHOP_PERIODE_3'], 'position.csv'),
     os.path.join(folders_config['WEBSHOP_PERIODE_3'], 'produkt.csv'),
     os.path.join(folders_config['WEBSHOP_PERIODE_3'], 'produktkategorie.csv'),
     os.path.join(folders_config['WEBSHOP_PERIODE_3'], 'vereinspartner.csv'),
@@ -162,13 +180,18 @@ csv_files_p3 = [
 ]
 
 for sql_file in sql_files_p3:
-    execute_sql_file(sql_file, 'WILLIBALD_WEBSHOP_P3')
+    with open(sql_file, 'r') as file:
+        sql_commands = file.read().split(';')
+    execute_sql_commands(sql_commands)
 
 for csv_file in csv_files_p3:
     table_name = os.path.splitext(os.path.basename(csv_file))[0]
     load_csv_to_snowflake(csv_file, table_name, 'WILLIBALD_WEBSHOP_P3')
 
-# SQL-Skripte und CSV-Dateien für WILLIBALD_ROADSHOW_T1
+
+
+
+# SQL-Skripte und CSV-Dateien fÃ¼r WILLIBALD_ROADSHOW_T1
 sql_files_t1 = [
     os.path.join(folders_config['ROADSHOW_TAG_1'], '_Roadshow_DDL_ANSI.sql'),
     os.path.join(folders_config['ROADSHOW_TAG_1'], '_Roadshow_DDL_1_ANSI.sql')
@@ -179,13 +202,17 @@ csv_files_t1 = [
 ]
 
 for sql_file in sql_files_t1:
-    execute_sql_file(sql_file, 'WILLIBALD_ROADSHOW_T1')
+    with open(sql_file, 'r') as file:
+        sql_commands = file.read().split(';')
+    execute_sql_commands(sql_commands)
 
 for csv_file in csv_files_t1:
     table_name = os.path.splitext(os.path.basename(csv_file))[0]
     load_csv_to_snowflake(csv_file, table_name, 'WILLIBALD_ROADSHOW_T1')
 
-# SQL-Skripte und CSV-Dateien für WILLIBALD_ROADSHOW_T2
+
+
+# SQL-Skripte und CSV-Dateien fÃ¼r WILLIBALD_ROADSHOW_T2
 sql_files_t2 = [
     os.path.join(folders_config['ROADSHOW_TAG_2'], '_Roadshow_DDL_ANSI.sql')
 ]
@@ -195,13 +222,18 @@ csv_files_t2 = [
 ]
 
 for sql_file in sql_files_t2:
-    execute_sql_file(sql_file, 'WILLIBALD_ROADSHOW_T2')
+    with open(sql_file, 'r') as file:
+        sql_commands = file.read().split(';')
+    execute_sql_commands(sql_commands)
 
 for csv_file in csv_files_t2:
     table_name = os.path.splitext(os.path.basename(csv_file))[0]
     load_csv_to_snowflake(csv_file, table_name, 'WILLIBALD_ROADSHOW_T2')
 
-# SQL-Skripte und CSV-Dateien für WILLIBALD_ROADSHOW_T3
+
+
+
+# SQL-Skripte und CSV-Dateien fÃ¼r WILLIBALD_ROADSHOW_T3
 sql_files_t3 = [
     os.path.join(folders_config['ROADSHOW_TAG_3'], '_Roadshow_DDL_ANSI.sql')
 ]
@@ -211,7 +243,9 @@ csv_files_t3 = [
 ]
 
 for sql_file in sql_files_t3:
-    execute_sql_file(sql_file, 'WILLIBALD_ROADSHOW_T3')
+    with open(sql_file, 'r') as file:
+        sql_commands = file.read().split(';')
+    execute_sql_commands(sql_commands)
 
 for csv_file in csv_files_t3:
     table_name = os.path.splitext(os.path.basename(csv_file))[0]
@@ -225,7 +259,7 @@ tables_p1 = [
     'lieferadresse',
     'lieferdienst',
     'Lieferung',
-    'postition',
+    'position',
     'produkt',
     'produktkategorie',
     'ref_produkt_typ',
@@ -244,5 +278,5 @@ tables_t1 = [
 for table in tables_t1:
     create_view(table, table, 'WILLIBALD_ROADSHOW_T1', 'WILLIBALD_ROADSHOW')
 
-# Verbindung schließen
+# Verbindung schlieÃŸen
 conn.close()
