@@ -8,6 +8,16 @@ where stage='bestellung'
 group by 1,2
 order by 1,2
 
+/* Sum positionen und gesamtbetrag eines Kunden*/
+select br._key_kunde,
+from uss_willibald.bridge_willibald br
+left join uss_willibald.bestellung b_m using (_key_bestellung_m)
+left join uss_willibald.bestellung b_m using (_key_bestellung_m)
+where stage='bestellung'
+group by 1,2
+order by 1,2
+
+
 
 /* Count oberkategorie  über bestelldatum */
 select b.bestelldatum ,p.oberkategorie ,count(1)
