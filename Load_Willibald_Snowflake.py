@@ -1,24 +1,6 @@
-#pip install snowflake-connector-python
-
-
-import snowflake.connector
+import json
 import os
-
-# Snowflake-Verbindungsinformationen
-account = 'your_account'
-user = 'your_username'
-password = 'your_password'
-warehouse = 'your_warehouse'
-database = 'your_database'
-
-# Verbindung zu Snowflake herstellen
-conn = snowflake.connector.connect(
-    user=user,
-    password=password,
-    account=account,
-    warehouse=warehouse,
-    database=database
-)
+import snowflake.connector
 
 # Funktion zum Erstellen eines Schemas
 def create_schema(schema_name):
@@ -72,40 +54,60 @@ def create_view(view_name, table_name, source_schema, target_schema):
     conn.commit()
     cursor.close()
 
+
+
+
+# Konfigurationsdateien laden
+with open('config/config.json', 'r') as file:
+    config = json.load(file)
+
+with open('config/folders_config.json', 'r') as file:
+    folders_config = json.load(file)
+
+with open('config/schemas_config.json', 'r') as file:
+    schemas_config = json.load(file)
+
+# Verbindungsinformationen aus der Konfigurationsdatei lesen
+account = config['SNOWFLAKE_ACCOUNT']
+user = config['SNOWFLAKE_USER']
+password = config['SNOWFLAKE_PASSWORD']
+warehouse = config['SNOWFLAKE_WAREHOUSE']
+database = config['SNOWFLAKE_DATABASE']
+
+# Verbindung zu Snowflake herstellen
+conn = snowflake.connector.connect(
+    user=user,
+    password=password,
+    account=account,
+    warehouse=warehouse,
+    database=database
+)
+
 # Schemata erstellen
-schemas = [
-    'WILLIBALD_WEBSHOP',
-    'WILLIBALD_WEBSHOP_P1',
-    'WILLIBALD_WEBSHOP_P2',
-    'WILLIBALD_WEBSHOP_P3',
-    'WILLIBALD_ROADSHOW',
-    'WILLIBALD_ROADSHOW_T1',
-    'WILLIBALD_ROADSHOW_T2',
-    'WILLIBALD_ROADSHOW_T3'
-]
+schemas = schemas_config['schemas']
 
 for schema in schemas:
     create_schema(schema)
 
 # SQL-Skripte und CSV-Dateien für WILLIBALD_WEBSHOP_P1
 sql_files_p1 = [
-    '/Willibald-Data/Webshop/Testdaten Periode 1/_Testdaten_DDL_1_ANSI.sql',
-    '/Willibald-Data/Webshop/Testdaten Periode 1/Dubletten_ANSI.sql'
+    os.path.join(folders_config['WEBSHOP_PERIODE_1'], '_Testdaten_DDL_1_ANSI.sql'),
+    os.path.join(folders_config['WEBSHOP_PERIODE_1'], 'Dubletten_ANSI.sql')
 ]
 
 csv_files_p1 = [
-    '/Willibald-Data/Webshop/Testdaten Periode 1/bestellung.csv',
-    '/Willibald-Data/Webshop/Testdaten Periode 1/href_termintreue.csv',
-    '/Willibald-Data/Webshop/Testdaten Periode 1/kunde.csv',
-    '/Willibald-Data/Webshop/Testdaten Periode 1/lieferadresse.csv',
-    '/Willibald-Data/Webshop/Testdaten Periode 1/lieferdienst.csv',
-    '/Willibald-Data/Webshop/Testdaten Periode 1/Lieferung.csv',
-    '/Willibald-Data/Webshop/Testdaten Periode 1/postition.csv',
-    '/Willibald-Data/Webshop/Testdaten Periode 1/produkt.csv',
-    '/Willibald-Data/Webshop/Testdaten Periode 1/produktkategorie.csv',
-    '/Willibald-Data/Webshop/Testdaten Periode 1/ref_produkt_typ.csv',
-    '/Willibald-Data/Webshop/Testdaten Periode 1/vereinspartner.csv',
-    '/Willibald-Data/Webshop/Testdaten Periode 1/wohnort.csv'
+    os.path.join(folders_config['WEBSHOP_PERIODE_1'], 'bestellung.csv'),
+    os.path.join(folders_config['WEBSHOP_PERIODE_1'], 'href_termintreue.csv'),
+    os.path.join(folders_config['WEBSHOP_PERIODE_1'], 'kunde.csv'),
+    os.path.join(folders_config['WEBSHOP_PERIODE_1'], 'lieferadresse.csv'),
+    os.path.join(folders_config['WEBSHOP_PERIODE_1'], 'lieferdienst.csv'),
+    os.path.join(folders_config['WEBSHOP_PERIODE_1'], 'Lieferung.csv'),
+    os.path.join(folders_config['WEBSHOP_PERIODE_1'], 'postition.csv'),
+    os.path.join(folders_config['WEBSHOP_PERIODE_1'], 'produkt.csv'),
+    os.path.join(folders_config['WEBSHOP_PERIODE_1'], 'produktkategorie.csv'),
+    os.path.join(folders_config['WEBSHOP_PERIODE_1'], 'ref_produkt_typ.csv'),
+    os.path.join(folders_config['WEBSHOP_PERIODE_1'], 'vereinspartner.csv'),
+    os.path.join(folders_config['WEBSHOP_PERIODE_1'], 'wohnort.csv')
 ]
 
 for sql_file in sql_files_p1:
@@ -117,21 +119,21 @@ for csv_file in csv_files_p1:
 
 # SQL-Skripte und CSV-Dateien für WILLIBALD_WEBSHOP_P2
 sql_files_p2 = [
-    '/Willibald-Data/Webshop/Testdaten Periode 2/_Testdaten_DDL_P2_ANSI.sql'
+    os.path.join(folders_config['WEBSHOP_PERIODE_2'], '_Testdaten_DDL_P2_ANSI.sql')
 ]
 
 csv_files_p2 = [
-    '/willibald-data/Webshop/Testdaten Periode 2/bestellung.csv',
-    '/willibald-data/Webshop/Testdaten Periode 2/href_termintreue.csv',
-    '/willibald-data/Webshop/Testdaten Periode 2/kunde.csv',
-    '/willibald-data/Webshop/Testdaten Periode 2/lieferadresse.csv',
-    '/willibald-data/Webshop/Testdaten Periode 2/lieferdienst.csv',
-    '/willibald-data/Webshop/Testdaten Periode 2/Lieferung.csv',
-    '/willibald-data/Webshop/Testdaten Periode 2/postition.csv',
-    '/willibald-data/Webshop/Testdaten Periode 2/produkt.csv',
-    '/willibald-data/Webshop/Testdaten Periode 2/produktkategorie.csv',
-    '/willibald-data/Webshop/Testdaten Periode 2/vereinspartner.csv',
-    '/willibald-data/Webshop/Testdaten Periode 2/wohnort.csv'
+    os.path.join(folders_config['WEBSHOP_PERIODE_2'], 'bestellung.csv'),
+    os.path.join(folders_config['WEBSHOP_PERIODE_2'], 'href_termintreue.csv'),
+    os.path.join(folders_config['WEBSHOP_PERIODE_2'], 'kunde.csv'),
+    os.path.join(folders_config['WEBSHOP_PERIODE_2'], 'lieferadresse.csv'),
+    os.path.join(folders_config['WEBSHOP_PERIODE_2'], 'lieferdienst.csv'),
+    os.path.join(folders_config['WEBSHOP_PERIODE_2'], 'Lieferung.csv'),
+    os.path.join(folders_config['WEBSHOP_PERIODE_2'], 'postition.csv'),
+    os.path.join(folders_config['WEBSHOP_PERIODE_2'], 'produkt.csv'),
+    os.path.join(folders_config['WEBSHOP_PERIODE_2'], 'produktkategorie.csv'),
+    os.path.join(folders_config['WEBSHOP_PERIODE_2'], 'vereinspartner.csv'),
+    os.path.join(folders_config['WEBSHOP_PERIODE_2'], 'wohnort.csv')
 ]
 
 for sql_file in sql_files_p2:
@@ -143,20 +145,20 @@ for csv_file in csv_files_p2:
 
 # SQL-Skripte und CSV-Dateien für WILLIBALD_WEBSHOP_P3
 sql_files_p3 = [
-    '/Willibald-Data/Webshop/Testdaten Periode 3/_Testdaten_DDL_P3_ANSI.sql'
+    os.path.join(folders_config['WEBSHOP_PERIODE_3'], '_Testdaten_DDL_P3_ANSI.sql')
 ]
 
 csv_files_p3 = [
-    '/willibald-data/Webshop/Testdaten Periode 3/bestellung.csv',
-    '/willibald-data/Webshop/Testdaten Periode 3/kunde.csv',
-    '/willibald-data/Webshop/Testdaten Periode 3/lieferadresse.csv',
-    '/willibald-data/Webshop/Testdaten Periode 3/lieferdienst.csv',
-    '/willibald-data/Webshop/Testdaten Periode 3/Lieferung.csv',
-    '/willibald-data/Webshop/Testdaten Periode 3/postition.csv',
-    '/willibald-data/Webshop/Testdaten Periode 3/produkt.csv',
-    '/willibald-data/Webshop/Testdaten Periode 3/produktkategorie.csv',
-    '/willibald-data/Webshop/Testdaten Periode 3/vereinspartner.csv',
-    '/willibald-data/Webshop/Testdaten Periode 3/wohnort.csv'
+    os.path.join(folders_config['WEBSHOP_PERIODE_3'], 'bestellung.csv'),
+    os.path.join(folders_config['WEBSHOP_PERIODE_3'], 'kunde.csv'),
+    os.path.join(folders_config['WEBSHOP_PERIODE_3'], 'lieferadresse.csv'),
+    os.path.join(folders_config['WEBSHOP_PERIODE_3'], 'lieferdienst.csv'),
+    os.path.join(folders_config['WEBSHOP_PERIODE_3'], 'Lieferung.csv'),
+    os.path.join(folders_config['WEBSHOP_PERIODE_3'], 'postition.csv'),
+    os.path.join(folders_config['WEBSHOP_PERIODE_3'], 'produkt.csv'),
+    os.path.join(folders_config['WEBSHOP_PERIODE_3'], 'produktkategorie.csv'),
+    os.path.join(folders_config['WEBSHOP_PERIODE_3'], 'vereinspartner.csv'),
+    os.path.join(folders_config['WEBSHOP_PERIODE_3'], 'wohnort.csv')
 ]
 
 for sql_file in sql_files_p3:
@@ -168,12 +170,12 @@ for csv_file in csv_files_p3:
 
 # SQL-Skripte und CSV-Dateien für WILLIBALD_ROADSHOW_T1
 sql_files_t1 = [
-    '/willibald-data/Roadshow/Tag 1/_Roadshow_DDL_ANSI.sql',
-    '/willibald-data/Roadshow/Tag 1/_Roadshow_DDL_1_ANSI.sql'
+    os.path.join(folders_config['ROADSHOW_TAG_1'], '_Roadshow_DDL_ANSI.sql'),
+    os.path.join(folders_config['ROADSHOW_TAG_1'], '_Roadshow_DDL_1_ANSI.sql')
 ]
 
 csv_files_t1 = [
-    '/willibald-data/Roadshow/Tag 1/RS_Bestellung.csv'
+    os.path.join(folders_config['ROADSHOW_TAG_1'], 'RS_Bestellung.csv')
 ]
 
 for sql_file in sql_files_t1:
@@ -185,11 +187,11 @@ for csv_file in csv_files_t1:
 
 # SQL-Skripte und CSV-Dateien für WILLIBALD_ROADSHOW_T2
 sql_files_t2 = [
-    '/willibald-data/Roadshow/Tag 2/_Roadshow_DDL_ANSI.sql'
+    os.path.join(folders_config['ROADSHOW_TAG_2'], '_Roadshow_DDL_ANSI.sql')
 ]
 
 csv_files_t2 = [
-    '/willibald-data/Roadshow/Tag 2/RS_Bestellung.csv'
+    os.path.join(folders_config['ROADSHOW_TAG_2'], 'RS_Bestellung.csv')
 ]
 
 for sql_file in sql_files_t2:
@@ -201,11 +203,11 @@ for csv_file in csv_files_t2:
 
 # SQL-Skripte und CSV-Dateien für WILLIBALD_ROADSHOW_T3
 sql_files_t3 = [
-    '/willibald-data/Roadshow/Tag 3/_Roadshow_DDL_ANSI.sql'
+    os.path.join(folders_config['ROADSHOW_TAG_3'], '_Roadshow_DDL_ANSI.sql')
 ]
 
 csv_files_t3 = [
-    '/willibald-data/Roadshow/Tag 3/RS_Bestellung.csv'
+    os.path.join(folders_config['ROADSHOW_TAG_3'], 'RS_Bestellung.csv')
 ]
 
 for sql_file in sql_files_t3:
@@ -244,4 +246,3 @@ for table in tables_t1:
 
 # Verbindung schließen
 conn.close()
-
