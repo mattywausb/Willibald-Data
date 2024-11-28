@@ -1,10 +1,10 @@
 /* loads position daten into bridge and position table */
 
 
-delete from uss_willibald.bridge_willibald 
+delete from uss_willibald._bridge_willibald 
 where stage ='position';
 
-insert into uss_willibald.bridge_willibald (stage,_key_position,_key_position_m,_key_bestellung,_key_produkt ,_key_lieferadresse,_key_kunde) 
+insert into uss_willibald._bridge_willibald (stage,_key_position,_key_position_m,_key_bestellung,_key_produkt ,_key_lieferadresse,_key_kunde) 
 	select distinct 'position'
 		, p.bestellungid||'-->'||posid 
 		, p.bestellungid||'-->'||posid 
@@ -16,7 +16,7 @@ insert into uss_willibald.bridge_willibald (stage,_key_position,_key_position_m,
 	join willibald_shop_p1.bestellung b on b.bestellungid =p.bestellungid;
 
 /* 
- * select * from 	 uss_willibald.bridge_willibald where stage='position'
+ * select * from 	 uss_willibald._bridge_willibald where stage='position'
  */
 
 truncate table uss_willibald.position;

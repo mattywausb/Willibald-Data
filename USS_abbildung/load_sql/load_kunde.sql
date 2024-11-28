@@ -1,17 +1,17 @@
 /* loads kunde daten into bridge and kunde table */
 
 
-delete from uss_willibald.bridge_willibald 
+delete from uss_willibald._bridge_willibald 
 where stage ='kunde';
 
-insert into uss_willibald.bridge_willibald (stage,_key_kunde,_key_vereinspartner) 
+insert into uss_willibald._bridge_willibald (stage,_key_kunde,_key_vereinspartner) 
 	select distinct 'kunde'
 		, kundeid 
 		,vereinspartnerid 
 	from willibald_shop_p1.kunde;
 
 /* 
- * select * from 	 uss_willibald.bridge_willibald
+ * select * from 	 uss_willibald._bridge_willibald
  */
 
 truncate table uss_willibald.kunde;

@@ -1,16 +1,17 @@
 /* loads produkt daten into bridge and produkt table */
 
 
-delete from uss_willibald.bridge_willibald 
+delete from uss_willibald._bridge_willibald 
 where stage ='produkt';
 
-insert into uss_willibald.bridge_willibald (stage,_key_produkt) 
+insert into uss_willibald._bridge_willibald (stage,_key_produkt,_key_produkt_m) 
 	select distinct 'produkt'
+		,produktid
 		,produktid
 	from willibald_shop_p1.produkt;
 
 /* 
- * select * from 	 uss_willibald.bridge_willibald where stage='bestellung'
+ * select * from 	 uss_willibald._bridge_willibald where stage='bestellung'
  */
 
 truncate table uss_willibald.produkt;
@@ -35,4 +36,25 @@ join WILLIBALD_SHOP_P1.REF_PRODUKT_TYP pt on pt.typ =p.typ ;
 
 /* 
  * select * from 	 uss_willibald.produkt
+ */
+
+
+/* 
+ * select * from 	 uss_willibald._bridge_willibald where stage='bestellung'
+ */
+
+truncate table uss_willibald.produkt_m;
+
+INSERT INTO uss_willibald.produkt_m
+(_key_produkt_m, werbebudget)
+select 
+produktid,
+case when left(katid,3)='GSt' then 15000
+	when left(katid,3)='GSc' then 10800
+	when left(katid,2)='GM' then 22000
+	ELSE 5000 end werbebudget   -- just make up some Budget, depedning on KatID
+from  willibald_shop_p1.produkt p
+
+/* 
+ * select * from 	 uss_willibald.produkt_m
  */

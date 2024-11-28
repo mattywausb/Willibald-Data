@@ -1,7 +1,7 @@
 
--- DROP TABLE uss_willibald.bridge_willibald
+-- DROP TABLE uss_willibald._bridge_willibald
 
-CREATE TABLE uss_willibald.bridge_willibald (
+CREATE TABLE uss_willibald._bridge_willibald (
 	md_inserted_at timestamp default current_timestamp
 	,stage varchar(255) not null
 	,_key_bestellung numeric(20)
