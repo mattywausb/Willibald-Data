@@ -42,7 +42,7 @@ CREATE OR REPLACE TABLE Wohnort (
 );
 
 CREATE OR REPLACE TABLE Lieferadresse (
-    LieferAdrID INT NOT NULL,
+    LieferAdrID NUMBER(38,0) NOT NULL,
     KundeID CHAR(13) NOT NULL,
     Strasse VARCHAR(128) NOT NULL,
     Hausnummer VARCHAR(10) NOT NULL,
@@ -56,9 +56,9 @@ CREATE OR REPLACE TABLE Lieferadresse (
 CREATE OR REPLACE TABLE VereinsPartner (
     VereinsPartnerID VARCHAR(30) NOT NULL,
     KundeIDVerein CHAR(13) NOT NULL,
-    Rabatt1 INT NOT NULL,
-    Rabatt2 INT NOT NULL,
-    Rabatt3 INT NOT NULL,
+    Rabatt1 NUMBER(38,0) NOT NULL,
+    Rabatt2 NUMBER(38,0) NOT NULL,
+    Rabatt3 NUMBER(38,0) NOT NULL,
     CONSTRAINT PK_VereinsPartner PRIMARY KEY (VereinsPartnerID)
 );
 
@@ -70,11 +70,11 @@ CREATE OR REPLACE TABLE Kategorie (
 );
 
 CREATE OR REPLACE TABLE Produkt (
-    ProduktID INT NOT NULL,
+    ProduktID NUMBER(38,0) NOT NULL,
     KatID VARCHAR(50) NOT NULL,
     Bezeichnung VARCHAR(512) NOT NULL,
     Umfang VARCHAR(128) NOT NULL,
-    Typ INT NOT NULL,
+    Typ NUMBER(38,0) NOT NULL,
     Preis DECIMAL(5,2) NOT NULL,
     Pflanzort VARCHAR(128) NOT NULL,
     Pflanzabstand VARCHAR(128) NOT NULL,
@@ -84,7 +84,7 @@ CREATE OR REPLACE TABLE Produkt (
 CREATE OR REPLACE TABLE Bestellung (
     BestellungID BIGINT NOT NULL,
     KundeID CHAR(13) NOT NULL,
-    AllgLieferAdrID INT NOT NULL,
+    AllgLieferAdrID NUMBER(38,0) NOT NULL,
     Bestelldatum DATE NOT NULL,
     Wunschdatum DATE NOT NULL,
     Rabatt NUMERIC(5,2) NOT NULL,
@@ -94,9 +94,9 @@ CREATE OR REPLACE TABLE Bestellung (
 CREATE OR REPLACE TABLE Position (
     BestellungID BIGINT NOT NULL,
     PosID BIGINT NOT NULL,
-    ProduktID INT NOT NULL,
-    SpezLieferAdrID INT NULL,
-    Menge INT NOT NULL,
+    ProduktID NUMBER(38,0) NOT NULL,
+    SpezLieferAdrID NUMBER(38,0) NULL,
+    Menge NUMBER(38,0) NOT NULL,
     Preis NUMERIC(10,2) NOT NULL,
     CONSTRAINT PK_Position PRIMARY KEY (BestellungID, PosID)
 );
@@ -104,7 +104,7 @@ CREATE OR REPLACE TABLE Position (
 CREATE OR REPLACE TABLE Lieferung (
     BestellungID BIGINT NOT NULL,
     PosID BIGINT NOT NULL,
-    LieferAdrID INT NOT NULL,
+    LieferAdrID NUMBER(38,0) NOT NULL,
     LieferDienstID VARCHAR(30) NOT NULL,
     LieferDatum DATE NOT NULL,
     CONSTRAINT PK_Lieferung PRIMARY KEY (BestellungID, PosID, LieferAdrID, LieferDienstID)
