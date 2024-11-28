@@ -1,12 +1,12 @@
-﻿-- Exported from QuickDBD: https://www.quickdatabasediagrams.com/
+-- Exported from QuickDBD: https://www.quickdatabasediagrams.com/
 -- NOTE! If you have used non-SQL datatypes in your design, you will have to change these here.
 
 
-CREATE SCHEMA WILLIBALD_ROADSHOW_T1;
+-- CREATE SCHEMA WILLIBALD_ROADSHOW_T1;
 
 SET DEFAULT SCHEMA WILLIBALD_ROADSHOW_T1;
 
-CREATE TABLE RS_Bestellung (
+CREATE OR REPLACE TABLE RS_Bestellung (
     BestellungID VARCHAR(128) NOT NULL,
     KundeID CHAR(13) NULL,
     VereinsPartnerID VARCHAR(30) NOT NULL,

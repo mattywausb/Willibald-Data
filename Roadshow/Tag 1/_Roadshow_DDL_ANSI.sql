@@ -1,15 +1,15 @@
-﻿-- Exported from QuickDBD: https://www.quickdatabasediagrams.com/
+-- Exported from QuickDBD: https://www.quickdatabasediagrams.com/
 -- NOTE! If you have used non-SQL datatypes in your design, you will have to change these here.
 
-SET XACT_ABORT ON;
+-- SET XACT_ABORT ON;
 
-BEGIN TRANSACTION QUICKDBD;
+-- BEGIN TRANSACTION QUICKDBD;
 
-CREATE SCHEMA WILLIBALD_ROADSHOW_T1;
+-- CREATE SCHEMA WILLIBALD_ROADSHOW_T1;
 
-SET DEFAULT SCHEMA WILLIBALD_ROADSHOW_T1;
+-- SET DEFAULT SCHEMA WILLIBALD_ROADSHOW_T1;
 
-CREATE TABLE Kunde (
+CREATE OR REPLACE TABLE Kunde (
     KundeID CHAR(13) NOT NULL,
     VereinsPartnerID VARCHAR(30) NULL,
     Vorname VARCHAR(128) NOT NULL,
@@ -25,7 +25,7 @@ CREATE TABLE Kunde (
     CONSTRAINT PK_Kunde PRIMARY KEY (KundeID)
 );
 
-CREATE TABLE VereinsPartner (
+CREATE OR REPLACE TABLE VereinsPartner (
     VereinsPartnerID VARCHAR(30) NOT NULL,
     KundeIDVerein CHAR(13) NOT NULL,
     Rabatt1 INT NOT NULL,
@@ -34,7 +34,7 @@ CREATE TABLE VereinsPartner (
     CONSTRAINT PK_VereinsPartner PRIMARY KEY (VereinsPartnerID)
 );
 
-CREATE TABLE Produkt (
+CREATE OR REPLACE TABLE Produkt (
     ProduktID INT NOT NULL,
     KatID VARCHAR(50) NOT NULL,
     Bezeichnung VARCHAR(512) NOT NULL,
@@ -46,7 +46,7 @@ CREATE TABLE Produkt (
     CONSTRAINT PK_Produkt PRIMARY KEY (ProduktID)
 );
 
-CREATE TABLE Bestellung (
+CREATE OR REPLACE TABLE Bestellung (
     BestellungID VARCHAR(128) NOT NULL,
     KundeID CHAR(13) NULL,
     VereinsPartnerID VARCHAR(30) NOT NULL,
@@ -71,4 +71,4 @@ ALTER TABLE Bestellung ADD CONSTRAINT FK_Bestellung_VereinsPartnerID FOREIGN KEY
 
 ALTER TABLE Bestellung ADD CONSTRAINT FK_Bestellung_ProduktID FOREIGN KEY (ProduktID) REFERENCES Produkt (ProduktID);
 
-COMMIT TRANSACTION QUICKDBD;
+-- COMMIT TRANSACTION QUICKDBD;

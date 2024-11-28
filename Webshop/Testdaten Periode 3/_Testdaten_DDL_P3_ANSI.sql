@@ -1,18 +1,18 @@
-﻿-- Exported from QuickDBD: https://www.quickdatabasediagrams.com/
+-- Exported from QuickDBD: https://www.quickdatabasediagrams.com/
 -- NOTE! If you have used non-SQL datatypes in your design, you will have to change these here.
 
 -- ANSI SQL does not support sp_rename, so we will skip these lines.
 
-SET XACT_ABORT ON;
+-- SET XACT_ABORT ON;
 
-BEGIN TRANSACTION QUICKDBD;
+-- BEGIN TRANSACTION QUICKDBD;
 
-CREATE SCHEMA WILLIBALD_WEBSHOP_P3;
+-- CREATE SCHEMA WILLIBALD_WEBSHOP_P3;
 
-SET DEFAULT SCHEMA WILLIBALD_WEBSHOP_P3;
+-- SET DEFAULT SCHEMA WILLIBALD_WEBSHOP_P3;
 
 
-CREATE TABLE Kunde (
+CREATE OR REPLACE TABLE Kunde (
     KundeID CHAR(13) NOT NULL,
     VereinsPartnerID VARCHAR(30) NULL,
     Vorname VARCHAR(128) NOT NULL,
@@ -28,7 +28,7 @@ CREATE TABLE Kunde (
     CONSTRAINT PK_Kunde PRIMARY KEY (KundeID)
 );
 
-CREATE TABLE Wohnort (
+CREATE OR REPLACE TABLE Wohnort (
     KundeID CHAR(13) NOT NULL,
     Von DATE NOT NULL,
     Bis DATE NULL,
@@ -41,7 +41,7 @@ CREATE TABLE Wohnort (
     CONSTRAINT PK_Wohnort PRIMARY KEY (KundeID, Von)
 );
 
-CREATE TABLE Lieferadresse (
+CREATE OR REPLACE TABLE Lieferadresse (
     LieferAdrID INT NOT NULL,
     KundeID CHAR(13) NOT NULL,
     Strasse VARCHAR(128) NOT NULL,
@@ -53,7 +53,7 @@ CREATE TABLE Lieferadresse (
     CONSTRAINT PK_Lieferadresse PRIMARY KEY (LieferAdrID)
 );
 
-CREATE TABLE VereinsPartner (
+CREATE OR REPLACE TABLE VereinsPartner (
     VereinsPartnerID VARCHAR(30) NOT NULL,
     KundeIDVerein CHAR(13) NOT NULL,
     Rabatt1 INT NOT NULL,
@@ -62,14 +62,14 @@ CREATE TABLE VereinsPartner (
     CONSTRAINT PK_VereinsPartner PRIMARY KEY (VereinsPartnerID)
 );
 
-CREATE TABLE Kategorie (
+CREATE OR REPLACE TABLE Kategorie (
     KatID VARCHAR(50) NOT NULL,
     OberKatID VARCHAR(50) NULL,
     Name VARCHAR(512) NOT NULL,
     CONSTRAINT PK_Kategorie PRIMARY KEY (KatID)
 );
 
-CREATE TABLE Produkt (
+CREATE OR REPLACE TABLE Produkt (
     ProduktID INT NOT NULL,
     KatID VARCHAR(50) NOT NULL,
     Bezeichnung VARCHAR(512) NOT NULL,
@@ -81,7 +81,7 @@ CREATE TABLE Produkt (
     CONSTRAINT PK_Produkt PRIMARY KEY (ProduktID)
 );
 
-CREATE TABLE Bestellung (
+CREATE OR REPLACE TABLE Bestellung (
     BestellungID BIGINT NOT NULL,
     KundeID CHAR(13) NOT NULL,
     AllgLieferAdrID INT NOT NULL,
@@ -91,7 +91,7 @@ CREATE TABLE Bestellung (
     CONSTRAINT PK_Bestellung PRIMARY KEY (BestellungID)
 );
 
-CREATE TABLE Position (
+CREATE OR REPLACE TABLE Position (
     BestellungID BIGINT NOT NULL,
     PosID BIGINT NOT NULL,
     ProduktID INT NOT NULL,
@@ -101,7 +101,7 @@ CREATE TABLE Position (
     CONSTRAINT PK_Position PRIMARY KEY (BestellungID, PosID)
 );
 
-CREATE TABLE Lieferung (
+CREATE OR REPLACE TABLE Lieferung (
     BestellungID BIGINT NOT NULL,
     PosID BIGINT NOT NULL,
     LieferAdrID INT NOT NULL,
@@ -110,7 +110,7 @@ CREATE TABLE Lieferung (
     CONSTRAINT PK_Lieferung PRIMARY KEY (BestellungID, PosID, LieferAdrID, LieferDienstID)
 );
 
-CREATE TABLE LieferDienst (
+CREATE OR REPLACE TABLE LieferDienst (
     LieferDienstID VARCHAR(30) NOT NULL,
     Name VARCHAR(128) NOT NULL,
     Telefon VARCHAR(20) NOT NULL,
@@ -152,4 +152,4 @@ ALTER TABLE Lieferung ADD CONSTRAINT FK_Lieferung_LieferAdrID FOREIGN KEY (Liefe
 
 ALTER TABLE Lieferung ADD CONSTRAINT FK_Lieferung_LieferDienstID FOREIGN KEY (LieferDienstID) REFERENCES LieferDienst (LieferDienstID);
 
-COMMIT TRANSACTION QUICKDBD;
+-- COMMIT TRANSACTION QUICKDBD;

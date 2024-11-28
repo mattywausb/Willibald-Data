@@ -1,8 +1,8 @@
 {
-    "WEBSHOP_PERIODE_1": "/Willibald-Data/Webshop/Testdaten Periode 1",
-    "WEBSHOP_PERIODE_2": "/willibald-data/Webshop/Testdaten Periode 2",
-    "WEBSHOP_PERIODE_3": "/willibald-data/Webshop/Testdaten Periode 3",
-    "ROADSHOW_TAG_1": "/willibald-data/Roadshow/Tag 1",
-    "ROADSHOW_TAG_2": "/willibald-data/Roadshow/Tag 2",
-    "ROADSHOW_TAG_3": "/willibald-data/Roadshow/Tag 3"
+    "WEBSHOP_PERIODE_1": "Webshop/Testdaten Periode 1/",
+    "WEBSHOP_PERIODE_2": "Webshop/Testdaten Periode 2/",
+    "WEBSHOP_PERIODE_3": "Webshop/Testdaten Periode 3/",
+    "ROADSHOW_TAG_1": "Roadshow/Tag 1/",
+    "ROADSHOW_TAG_2": "Roadshow/Tag 2/",
+    "ROADSHOW_TAG_3": "Roadshow/Tag 3/"
 }
