@@ -127,6 +127,9 @@ schemas = schemas_config['schemas']
 for schema in schemas:
     create_schema(schema)
 
+
+
+
 # SQL-Skripte und CSV-Dateien für WILLIBALD_WEBSHOP_P1
 sql_files_p1 = [
     os.path.join(folders_config['WEBSHOP_PERIODE_1'], '_Testdaten_DDL_1_ANSI.sql'),
@@ -169,6 +172,8 @@ for csv_file in csv_files_p1:
 
 
 
+
+
 # SQL-Skripte und CSV-Dateien für WILLIBALD_WEBSHOP_P2
 sql_files_p2 = [
     os.path.join(folders_config['WEBSHOP_PERIODE_2'], 'termintreue_DDL_ANSI.sql'),
@@ -198,10 +203,12 @@ for csv_file in csv_files_p2:
     table_name = csv_to_table_mapping.get(os.path.basename(csv_file), os.path.splitext(os.path.basename(csv_file))[0])
     load_csv_to_snowflake(csv_file, table_name, 'WILLIBALD_WEBSHOP_P2')
 
+
+
+
+
 # SQL-Skripte und CSV-Dateien für WILLIBALD_WEBSHOP_P3
 sql_files_p3 = [
-    os.path.join(folders_config['WEBSHOP_PERIODE_1'], 'termintreue_DDL_ANSI.sql'),
-    os.path.join(folders_config['WEBSHOP_PERIODE_1'], 'kategorie_DDL_ANSI.sql'),
     os.path.join(folders_config['WEBSHOP_PERIODE_3'], '_Testdaten_DDL_P3_ANSI.sql')
 ]
 
@@ -227,9 +234,11 @@ for csv_file in csv_files_p3:
     table_name = csv_to_table_mapping.get(os.path.basename(csv_file), os.path.splitext(os.path.basename(csv_file))[0])
     load_csv_to_snowflake(csv_file, table_name, 'WILLIBALD_WEBSHOP_P3')
 
+
+
+
 # SQL-Skripte und CSV-Dateien für WILLIBALD_ROADSHOW_T1
 sql_files_t1 = [
-    os.path.join(folders_config['WEBSHOP_PERIODE_1'], 'kategorie_DDL_ANSI.sql'),
     os.path.join(folders_config['ROADSHOW_TAG_1'], '_Roadshow_DDL_1_ANSI.sql')
 ]
 
@@ -245,6 +254,9 @@ for sql_file in sql_files_t1:
 for csv_file in csv_files_t1:
     table_name = csv_to_table_mapping.get(os.path.basename(csv_file), os.path.splitext(os.path.basename(csv_file))[0])
     load_csv_to_snowflake(csv_file, table_name, 'WILLIBALD_ROADSHOW_T1')
+
+
+
 
 # SQL-Skripte und CSV-Dateien für WILLIBALD_ROADSHOW_T2
 sql_files_t2 = [
@@ -263,6 +275,9 @@ for sql_file in sql_files_t2:
 for csv_file in csv_files_t2:
     table_name = csv_to_table_mapping.get(os.path.basename(csv_file), os.path.splitext(os.path.basename(csv_file))[0])
     load_csv_to_snowflake(csv_file, table_name, 'WILLIBALD_ROADSHOW_T2')
+
+
+
 
 # SQL-Skripte und CSV-Dateien für WILLIBALD_ROADSHOW_T3
 sql_files_t3 = [

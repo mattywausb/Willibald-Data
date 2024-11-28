@@ -33,7 +33,7 @@ CREATE OR REPLACE TABLE Wohnort (
     Von DATE NOT NULL,
     Bis DATE NULL,
     Strasse VARCHAR(128) NOT NULL,
-    Hausnummer VARCHAR(10) NOT NULL,
+    Hausnummer VARCHAR(10)  NULL,
     Adresszusatz VARCHAR(128) NULL,
     Plz VARCHAR(10) NOT NULL,
     Ort VARCHAR(128) NOT NULL,

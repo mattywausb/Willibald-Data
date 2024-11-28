@@ -13,7 +13,7 @@ CREATE OR REPLACE TABLE RS_Bestellung (
     VereinsPartnerID VARCHAR(30) NOT NULL,
     Kaufdatum DATE NOT NULL,
     Kreditkarte VARCHAR(30) NULL,
-    GueltigBis CHAR(5) NULL,
+    GueltigBis CHAR(6) NULL,
     KKFirma VARCHAR(128) NULL,
     ProduktID INT NOT NULL,
     Menge INT NOT NULL,
