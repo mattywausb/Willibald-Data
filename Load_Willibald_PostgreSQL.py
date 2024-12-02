@@ -52,9 +52,16 @@ def adjust_csv(file_path, temp_file_path):
                # Datumsformat von 'DD.MM.YYYY' in 'YYYY-MM-DD' ändern
                 if len(item) == 10 and item.isdigit():
                     item = f"{item[6:]}-{item[3:5]}-{item[:2]}"
+
                 # Dezimaltrenner ',' durch '.' ersetzen und Tausendertrennzeichen '.' entfernen
                 item = item.replace(',', '.')  #.replace('.', '')
-                new_row.append(item)
+
+				# Remove BOM Character from UTF-8
+                if item.startswith('\ufeff'):
+                    new_row.append(item[3:])
+                else:
+                    new_row.append(item)
+#                new_row.append(item)
             writer.writerow(new_row)
 
 # Funktion zum Laden einer CSV-Datei in PostgreSQL
