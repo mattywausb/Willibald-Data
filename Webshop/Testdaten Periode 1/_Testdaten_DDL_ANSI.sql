@@ -9,7 +9,7 @@
 
 --set default schema willibald_webshop_p1;
 
-CREATE OR REPLACE TABLE Kunde (
+CREATE TABLE Kunde (
     KundeID CHAR(13) NOT NULL,
     VereinsPartnerID VARCHAR(30) NULL,
     Vorname VARCHAR(128) NOT NULL,
@@ -25,7 +25,7 @@ CREATE OR REPLACE TABLE Kunde (
     CONSTRAINT PK_Kunde PRIMARY KEY (KundeID)
 );
 
-CREATE OR REPLACE TABLE Wohnort (
+CREATE TABLE Wohnort (
     KundeID CHAR(13) NOT NULL,
     Von DATE NOT NULL,
     Bis DATE NULL,
@@ -38,7 +38,7 @@ CREATE OR REPLACE TABLE Wohnort (
     CONSTRAINT PK_Wohnort PRIMARY KEY (KundeID, Von)
 );
 
-CREATE OR REPLACE TABLE Lieferadresse (
+CREATE TABLE Lieferadresse (
     LieferAdrID INT NOT NULL,
     KundeID CHAR(13) NOT NULL,
     Strasse VARCHAR(128) NOT NULL,
@@ -50,7 +50,7 @@ CREATE OR REPLACE TABLE Lieferadresse (
     CONSTRAINT PK_Lieferadresse PRIMARY KEY (LieferAdrID)
 );
 
-CREATE OR REPLACE TABLE VereinsPartner (
+CREATE TABLE VereinsPartner (
     VereinsPartnerID VARCHAR(30) NOT NULL,
     KundeIDVerein CHAR(13) NOT NULL,
     Rabatt1 INT NOT NULL,
@@ -59,14 +59,14 @@ CREATE OR REPLACE TABLE VereinsPartner (
     CONSTRAINT PK_VereinsPartner PRIMARY KEY (VereinsPartnerID)
 );
 
-CREATE OR REPLACE TABLE Kategorie (
+CREATE TABLE Kategorie (
     KatID VARCHAR(50) NOT NULL,
     OberKatID VARCHAR(50) NULL,
     Name VARCHAR(512) NOT NULL,
     CONSTRAINT PK_Kategorie PRIMARY KEY (KatID)
 );
 
-CREATE OR REPLACE TABLE Produkt (
+CREATE TABLE Produkt (
     ProduktID INT NOT NULL,
     KatID VARCHAR(50) NOT NULL,
     Bezeichnung VARCHAR(512) NOT NULL,
@@ -78,7 +78,7 @@ CREATE OR REPLACE TABLE Produkt (
     CONSTRAINT PK_Produkt PRIMARY KEY (ProduktID)
 );
 
-CREATE OR REPLACE TABLE Bestellung (
+CREATE TABLE Bestellung (
     BestellungID BIGINT NOT NULL,
     KundeID CHAR(13) NOT NULL,
     AllgLieferAdrID INT NOT NULL,
@@ -88,7 +88,7 @@ CREATE OR REPLACE TABLE Bestellung (
     CONSTRAINT PK_Bestellung PRIMARY KEY (BestellungID)
 );
 
-CREATE OR REPLACE TABLE Position (
+CREATE TABLE Position (
     BestellungID BIGINT NOT NULL,
     PosID BIGINT NOT NULL,
     ProduktID INT NOT NULL,
@@ -98,7 +98,7 @@ CREATE OR REPLACE TABLE Position (
     CONSTRAINT PK_Position PRIMARY KEY (BestellungID, PosID)
 );
 
-CREATE OR REPLACE TABLE Lieferung (
+CREATE TABLE Lieferung (
     BestellungID BIGINT NOT NULL,
     PosID BIGINT NOT NULL,
     LieferAdrID INT NOT NULL,
@@ -107,7 +107,7 @@ CREATE OR REPLACE TABLE Lieferung (
     CONSTRAINT PK_Lieferung PRIMARY KEY (BestellungID, PosID, LieferAdrID, LieferDienstID)
 );
 
-CREATE OR REPLACE TABLE LieferDienst (
+CREATE TABLE LieferDienst (
     LieferDienstID VARCHAR(30) NOT NULL,
     Name VARCHAR(128) NOT NULL,
     Telefon VARCHAR(20) NOT NULL,

@@ -1,6 +1,6 @@
 import json
 import os
-import snowflake.connector
+import psycopg2
 import csv
 
 # Wrapper-Funktion für die execute-Methode des Cursors
@@ -19,7 +19,7 @@ def create_schema(schema_name):
 def execute_sql_commands(sql_commands, schema_name):
     cursor = conn.cursor()
     try:
-        log_and_execute(cursor, f"USE SCHEMA {schema_name}")
+        log_and_execute(cursor, f"SET search_path TO {schema_name}")
         for command in sql_commands:
             command = command.strip()
             if command and not command.startswith('--'):  # Nur nicht-leere Befehle und keine Kommentare ausführen
@@ -50,12 +50,12 @@ def adjust_csv(file_path, temp_file_path):
             new_row = []
             for item in row:
                 # Dezimaltrenner ',' durch '.' ersetzen und Tausendertrennzeichen '.' entfernen
-                item = item.replace(',', '.')  #.replace('.', '')
+#               item = item.replace(',', '.') #.replace('.', '')
                 new_row.append(item)
             writer.writerow(new_row)
 
-# Funktion zum Laden einer CSV-Datei in Snowflake
-def load_csv_to_snowflake(file_path, table_name, schema_name):
+# Funktion zum Laden einer CSV-Datei in PostgreSQL
+def load_csv_to_postgres(file_path, table_name, schema_name):
     if not os.path.exists(file_path):
         print(f"Fehler: Die Datei {file_path} wurde nicht gefunden.")
         return
@@ -66,26 +66,13 @@ def load_csv_to_snowflake(file_path, table_name, schema_name):
 
     cursor = conn.cursor()
     try:
-        log_and_execute(cursor, f"USE SCHEMA {schema_name}")
-        # Erstelle eine temporäre Stage
-        stage_name = f"{table_name}_stage"
-        log_and_execute(cursor, f"CREATE OR REPLACE TEMPORARY STAGE {stage_name}")
+        log_and_execute(cursor, f"SET search_path TO {schema_name}")
 
-        # Lade die CSV-Datei in die temporäre Stage
-        log_and_execute(cursor, f"PUT 'file://{temp_file_path}' @{stage_name}")
-
-        # Lade die Daten aus der Stage in die Tabelle
-        log_and_execute(cursor, f"""
-            COPY INTO {schema_name}.{table_name}
-            FROM @{stage_name}
-            FILE_FORMAT = (
-                TYPE = 'CSV',
-                FIELD_OPTIONALLY_ENCLOSED_BY = '"',
-                FIELD_DELIMITER = ';',
-                DATE_FORMAT = 'DD.MM.YYYY',
-                SKIP_HEADER = 1
-            )
-        """)
+        # Lade die Daten aus der temporären Datei in die Tabelle
+        with open(temp_file_path, 'r') as f:
+            cursor.copy_expert(f"""
+                COPY {table_name} FROM STDIN WITH (FORMAT csv, DELIMITER ';', HEADER TRUE)
+            """, f)
 
         print(f"{file_path} erfolgreich in {table_name} geladen.")
     except Exception as e:
@@ -98,7 +85,7 @@ def load_csv_to_snowflake(file_path, table_name, schema_name):
 # Funktion zum Erstellen eines Views
 def create_view(view_name, table_name, source_schema, target_schema):
     cursor = conn.cursor()
-    log_and_execute(cursor, f"USE SCHEMA {target_schema}")
+    log_and_execute(cursor, f"SET search_path TO {target_schema}")
     log_and_execute(cursor, f"""
         CREATE OR REPLACE VIEW {view_name} AS
         SELECT * FROM {source_schema}.{table_name}
@@ -107,7 +94,7 @@ def create_view(view_name, table_name, source_schema, target_schema):
     cursor.close()
 
 # Konfigurationsdateien laden
-with open('config/db_snowflake_config.json', 'r') as file:
+with open('config/db_postgresql_config.json', 'r') as file:
     db_config = json.load(file)
 
 with open('config/folders_config.json', 'r') as file:
@@ -117,19 +104,19 @@ with open('config/schemas_config.json', 'r') as file:
     schemas_config = json.load(file)
 
 # Verbindungsinformationen aus der Konfigurationsdatei lesen
-account = db_config['SNOWFLAKE_ACCOUNT']
-user = db_config['SNOWFLAKE_USER']
-password = db_config['SNOWFLAKE_PASSWORD']
-warehouse = db_config['SNOWFLAKE_WAREHOUSE']
-database = db_config['SNOWFLAKE_DATABASE']
+host = db_config['POSTGRES_HOST']
+port = db_config['POSTGRES_PORT']
+database = db_config['POSTGRES_DATABASE']
+user = db_config['POSTGRES_USER']
+password = db_config['POSTGRES_PASSWORD']
 
-# Verbindung zu Snowflake herstellen
-conn = snowflake.connector.connect(
+# Verbindung zu PostgreSQL herstellen
+conn = psycopg2.connect(
+    host=host,
+    port=port,
+    database=database,
     user=user,
-    password=password,
-    account=account,
-    warehouse=warehouse,
-    database=database
+    password=password
 )
 
 # Schemata aus schema_config.json einlesen
@@ -180,7 +167,7 @@ for sql_file in sql_files_p1:
 
 for csv_file in csv_files_p1:
     table_name = csv_to_table_mapping.get(os.path.basename(csv_file), os.path.splitext(os.path.basename(csv_file))[0])
-    load_csv_to_snowflake(csv_file, table_name, 'WILLIBALD_WEBSHOP_P1')
+    load_csv_to_postgres(csv_file, table_name, 'WILLIBALD_WEBSHOP_P1')
 
 # SQL-Skripte und CSV-Dateien für WILLIBALD_WEBSHOP_P2
 sql_files_p2 = [
@@ -209,7 +196,7 @@ for sql_file in sql_files_p2:
 
 for csv_file in csv_files_p2:
     table_name = csv_to_table_mapping.get(os.path.basename(csv_file), os.path.splitext(os.path.basename(csv_file))[0])
-    load_csv_to_snowflake(csv_file, table_name, 'WILLIBALD_WEBSHOP_P2')
+    load_csv_to_postgres(csv_file, table_name, 'WILLIBALD_WEBSHOP_P2')
 
 # SQL-Skripte und CSV-Dateien für WILLIBALD_WEBSHOP_P3
 sql_files_p3 = [
@@ -236,7 +223,7 @@ for sql_file in sql_files_p3:
 
 for csv_file in csv_files_p3:
     table_name = csv_to_table_mapping.get(os.path.basename(csv_file), os.path.splitext(os.path.basename(csv_file))[0])
-    load_csv_to_snowflake(csv_file, table_name, 'WILLIBALD_WEBSHOP_P3')
+    load_csv_to_postgres(csv_file, table_name, 'WILLIBALD_WEBSHOP_P3')
 
 # SQL-Skripte und CSV-Dateien für WILLIBALD_ROADSHOW_T1
 sql_files_t1 = [
@@ -254,7 +241,7 @@ for sql_file in sql_files_t1:
 
 for csv_file in csv_files_t1:
     table_name = csv_to_table_mapping.get(os.path.basename(csv_file), os.path.splitext(os.path.basename(csv_file))[0])
-    load_csv_to_snowflake(csv_file, table_name, 'WILLIBALD_ROADSHOW_T1')
+    load_csv_to_postgres(csv_file, table_name, 'WILLIBALD_ROADSHOW_T1')
 
 # SQL-Skripte und CSV-Dateien für WILLIBALD_ROADSHOW_T2
 sql_files_t2 = [
@@ -272,7 +259,7 @@ for sql_file in sql_files_t2:
 
 for csv_file in csv_files_t2:
     table_name = csv_to_table_mapping.get(os.path.basename(csv_file), os.path.splitext(os.path.basename(csv_file))[0])
-    load_csv_to_snowflake(csv_file, table_name, 'WILLIBALD_ROADSHOW_T2')
+    load_csv_to_postgres(csv_file, table_name, 'WILLIBALD_ROADSHOW_T2')
 
 # SQL-Skripte und CSV-Dateien für WILLIBALD_ROADSHOW_T3
 sql_files_t3 = [
@@ -290,7 +277,7 @@ for sql_file in sql_files_t3:
 
 for csv_file in csv_files_t3:
     table_name = csv_to_table_mapping.get(os.path.basename(csv_file), os.path.splitext(os.path.basename(csv_file))[0])
-    load_csv_to_snowflake(csv_file, table_name, 'WILLIBALD_ROADSHOW_T3')
+    load_csv_to_postgres(csv_file, table_name, 'WILLIBALD_ROADSHOW_T3')
 
 # Views im Schema WILLIBALD_WEBSHOP erstellen
 tables_p1 = [

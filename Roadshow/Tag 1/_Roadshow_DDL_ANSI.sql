@@ -9,7 +9,7 @@
 
 -- SET DEFAULT SCHEMA WILLIBALD_ROADSHOW_T1;
 
-CREATE OR REPLACE TABLE Kunde (
+CREATE TABLE Kunde (
     KundeID CHAR(13) NOT NULL,
     VereinsPartnerID VARCHAR(30) NULL,
     Vorname VARCHAR(128) NOT NULL,
@@ -25,7 +25,7 @@ CREATE OR REPLACE TABLE Kunde (
     CONSTRAINT PK_Kunde PRIMARY KEY (KundeID)
 );
 
-CREATE OR REPLACE TABLE VereinsPartner (
+CREATE TABLE VereinsPartner (
     VereinsPartnerID VARCHAR(30) NOT NULL,
     KundeIDVerein CHAR(13) NOT NULL,
     Rabatt1 INT NOT NULL,
@@ -34,7 +34,7 @@ CREATE OR REPLACE TABLE VereinsPartner (
     CONSTRAINT PK_VereinsPartner PRIMARY KEY (VereinsPartnerID)
 );
 
-CREATE OR REPLACE TABLE Produkt (
+CREATE TABLE Produkt (
     ProduktID INT NOT NULL,
     KatID VARCHAR(50) NOT NULL,
     Bezeichnung VARCHAR(512) NOT NULL,
@@ -46,7 +46,7 @@ CREATE OR REPLACE TABLE Produkt (
     CONSTRAINT PK_Produkt PRIMARY KEY (ProduktID)
 );
 
-CREATE OR REPLACE TABLE Bestellung (
+CREATE TABLE Bestellung (
     BestellungID VARCHAR(128) NOT NULL,
     KundeID CHAR(13) NULL,
     VereinsPartnerID VARCHAR(30) NOT NULL,

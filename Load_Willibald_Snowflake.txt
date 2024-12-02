@@ -1,6 +1,6 @@
 Erstelle mir ein Python Skript, welches
 
-folgende Schemata in Snowflake erstellt:
+folgende Schemata in Postgresql löscht und dann erstellt:
 
 WILLIBALD_WEBSHOP
 WILLIBALD_WEBSHOP_P1

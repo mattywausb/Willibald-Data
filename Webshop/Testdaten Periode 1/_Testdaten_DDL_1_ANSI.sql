@@ -9,7 +9,7 @@
 
 --set default schema willibald_webshop_p1;
 
-CREATE OR REPLACE TABLE Kunde (
+CREATE TABLE Kunde (
     KundeID CHAR(13) NOT NULL,
     VereinsPartnerID VARCHAR(30) NULL,
     Vorname VARCHAR(128) NOT NULL,
@@ -24,7 +24,7 @@ CREATE OR REPLACE TABLE Kunde (
     KKFirma VARCHAR(128) NOT NULL
 );
 
-CREATE OR REPLACE TABLE Wohnort (
+CREATE TABLE Wohnort (
     KundeID CHAR(13) NOT NULL,
     Von DATE NOT NULL,
     Bis DATE NULL,
@@ -36,7 +36,7 @@ CREATE OR REPLACE TABLE Wohnort (
     Land VARCHAR(128) NULL
 );
 
-CREATE OR REPLACE TABLE Lieferadresse (
+CREATE TABLE Lieferadresse (
     LieferAdrID INT NOT NULL,
     KundeID CHAR(13) NOT NULL,
     Strasse VARCHAR(128) NOT NULL,
@@ -47,7 +47,7 @@ CREATE OR REPLACE TABLE Lieferadresse (
     Land VARCHAR(128) NULL
 );
 
-CREATE OR REPLACE TABLE VereinsPartner (
+CREATE TABLE VereinsPartner (
     VereinsPartnerID VARCHAR(30) NOT NULL,
     KundeIDVerein CHAR(13) NOT NULL,
     Rabatt1 INT NOT NULL,
@@ -55,13 +55,13 @@ CREATE OR REPLACE TABLE VereinsPartner (
     Rabatt3 INT NOT NULL
 );
 
-CREATE OR REPLACE TABLE Kategorie (
+CREATE TABLE Kategorie (
     KatID VARCHAR(50) NOT NULL,
     OberKatID VARCHAR(50) NULL,
     Name VARCHAR(512) NOT NULL
 );
 
-CREATE OR REPLACE TABLE Produkt (
+CREATE TABLE Produkt (
     ProduktID INT NOT NULL,
     KatID VARCHAR(50) NOT NULL,
     Bezeichnung VARCHAR(512) NOT NULL,
@@ -72,7 +72,7 @@ CREATE OR REPLACE TABLE Produkt (
     Pflanzabstand VARCHAR(128) NOT NULL
 );
 
-CREATE OR REPLACE TABLE Bestellung (
+CREATE TABLE Bestellung (
     BestellungID BIGINT NOT NULL,
     KundeID CHAR(13) NOT NULL,
     AllgLieferAdrID INT NOT NULL,
@@ -81,7 +81,7 @@ CREATE OR REPLACE TABLE Bestellung (
     Rabatt NUMERIC(5,2) NOT NULL
 );
 
-CREATE OR REPLACE TABLE Position (
+CREATE TABLE Position (
     BestellungID BIGINT NOT NULL,
     PosID BIGINT NOT NULL,
     ProduktID INT NOT NULL,
@@ -90,7 +90,7 @@ CREATE OR REPLACE TABLE Position (
     Preis NUMERIC(10,2) NOT NULL
 );
 
-CREATE OR REPLACE TABLE Lieferung (
+CREATE TABLE Lieferung (
     BestellungID BIGINT NOT NULL,
     PosID BIGINT NOT NULL,
     LieferAdrID INT NOT NULL,
@@ -98,7 +98,7 @@ CREATE OR REPLACE TABLE Lieferung (
     LieferDatum DATE NOT NULL
 );
 
-CREATE OR REPLACE TABLE LieferDienst (
+CREATE TABLE LieferDienst (
     LieferDienstID VARCHAR(30) NOT NULL,
     Name VARCHAR(128) NOT NULL,
     Telefon VARCHAR(20) NOT NULL,
