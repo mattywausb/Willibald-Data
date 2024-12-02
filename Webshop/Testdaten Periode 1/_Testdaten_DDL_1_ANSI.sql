@@ -37,7 +37,7 @@ CREATE TABLE Wohnort (
 );
 
 CREATE TABLE Lieferadresse (
-    LieferAdrID INT NOT NULL,
+    LieferAdrID NUMERIC(10,0)NOT NULL,
     KundeID CHAR(13) NOT NULL,
     Strasse VARCHAR(128) NOT NULL,
     Hausnummer VARCHAR(10) NOT NULL,
@@ -50,9 +50,9 @@ CREATE TABLE Lieferadresse (
 CREATE TABLE VereinsPartner (
     VereinsPartnerID VARCHAR(30) NOT NULL,
     KundeIDVerein CHAR(13) NOT NULL,
-    Rabatt1 INT NOT NULL,
-    Rabatt2 INT NOT NULL,
-    Rabatt3 INT NOT NULL
+    Rabatt1 NUMERIC(10,0)NOT NULL,
+    Rabatt2 NUMERIC(10,0)NOT NULL,
+    Rabatt3 NUMERIC(10,0)NOT NULL
 );
 
 CREATE TABLE Kategorie (
@@ -62,38 +62,38 @@ CREATE TABLE Kategorie (
 );
 
 CREATE TABLE Produkt (
-    ProduktID INT NOT NULL,
+    ProduktID NUMERIC(10,0)NOT NULL,
     KatID VARCHAR(50) NOT NULL,
     Bezeichnung VARCHAR(512) NOT NULL,
     Umfang VARCHAR(128) NOT NULL,
-    Typ INT NOT NULL,
+    Typ NUMERIC(10,0)NOT NULL,
     Preis DECIMAL(5,2) NOT NULL,
     Pflanzort VARCHAR(128) NOT NULL,
     Pflanzabstand VARCHAR(128) NOT NULL
 );
 
 CREATE TABLE Bestellung (
-    BestellungID BIGINT NOT NULL,
+    BestellungID NUMERIC(19,0)NOT NULL,
     KundeID CHAR(13) NOT NULL,
-    AllgLieferAdrID INT NOT NULL,
+    AllgLieferAdrID NUMERIC(10,0)NOT NULL,
     Bestelldatum DATE NOT NULL,
     Wunschdatum DATE NOT NULL,
     Rabatt NUMERIC(5,2) NOT NULL
 );
 
 CREATE TABLE Position (
-    BestellungID BIGINT NOT NULL,
-    PosID BIGINT NOT NULL,
-    ProduktID INT NOT NULL,
-    SpezLieferAdrID INT NULL,
-    Menge INT NOT NULL,
+    BestellungID NUMERIC(19,0)NOT NULL,
+    PosID NUMERIC(19,0)NOT NULL,
+    ProduktID NUMERIC(10,0)NOT NULL,
+    SpezLieferAdrID NUMERIC(10,0)NULL,
+    Menge NUMERIC(10,0)NOT NULL,
     Preis NUMERIC(10,2) NOT NULL
 );
 
 CREATE TABLE Lieferung (
-    BestellungID BIGINT NOT NULL,
-    PosID BIGINT NOT NULL,
-    LieferAdrID INT NOT NULL,
+    BestellungID NUMERIC(19,0)NOT NULL,
+    PosID NUMERIC(19,0)NOT NULL,
+    LieferAdrID NUMERIC(10,0)NOT NULL,
     LieferDienstID VARCHAR(30) NOT NULL,
     LieferDatum DATE NOT NULL
 );

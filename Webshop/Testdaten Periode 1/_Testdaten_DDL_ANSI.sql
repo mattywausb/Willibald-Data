@@ -39,7 +39,7 @@ CREATE TABLE Wohnort (
 );
 
 CREATE TABLE Lieferadresse (
-    LieferAdrID INT NOT NULL,
+    LieferAdrID NUMERIC(10,0)NOT NULL,
     KundeID CHAR(13) NOT NULL,
     Strasse VARCHAR(128) NOT NULL,
     Hausnummer VARCHAR(10) NOT NULL,
@@ -53,9 +53,9 @@ CREATE TABLE Lieferadresse (
 CREATE TABLE VereinsPartner (
     VereinsPartnerID VARCHAR(30) NOT NULL,
     KundeIDVerein CHAR(13) NOT NULL,
-    Rabatt1 INT NOT NULL,
-    Rabatt2 INT NOT NULL,
-    Rabatt3 INT NOT NULL,
+    Rabatt1 NUMERIC(10,0)NOT NULL,
+    Rabatt2 NUMERIC(10,0)NOT NULL,
+    Rabatt3 NUMERIC(10,0)NOT NULL,
     CONSTRAINT PK_VereinsPartner PRIMARY KEY (VereinsPartnerID)
 );
 
@@ -67,11 +67,11 @@ CREATE TABLE Kategorie (
 );
 
 CREATE TABLE Produkt (
-    ProduktID INT NOT NULL,
+    ProduktID NUMERIC(10,0)NOT NULL,
     KatID VARCHAR(50) NOT NULL,
     Bezeichnung VARCHAR(512) NOT NULL,
     Umfang VARCHAR(128) NOT NULL,
-    Typ INT NOT NULL,
+    Typ NUMERIC(10,0)NOT NULL,
     Preis DECIMAL(5,2) NOT NULL,
     Pflanzort VARCHAR(128) NOT NULL,
     Pflanzabstand VARCHAR(128) NOT NULL,
@@ -79,9 +79,9 @@ CREATE TABLE Produkt (
 );
 
 CREATE TABLE Bestellung (
-    BestellungID BIGINT NOT NULL,
+    BestellungID NUMERIC(19,0)NOT NULL,
     KundeID CHAR(13) NOT NULL,
-    AllgLieferAdrID INT NOT NULL,
+    AllgLieferAdrID NUMERIC(10,0)NOT NULL,
     Bestelldatum DATE NOT NULL,
     Wunschdatum DATE NOT NULL,
     Rabatt NUMERIC(5,2) NOT NULL,
@@ -89,19 +89,19 @@ CREATE TABLE Bestellung (
 );
 
 CREATE TABLE Position (
-    BestellungID BIGINT NOT NULL,
-    PosID BIGINT NOT NULL,
-    ProduktID INT NOT NULL,
-    SpezLieferAdrID INT NULL,
-    Menge INT NOT NULL,
+    BestellungID NUMERIC(19,0)NOT NULL,
+    PosID NUMERIC(19,0)NOT NULL,
+    ProduktID NUMERIC(10,0)NOT NULL,
+    SpezLieferAdrID NUMERIC(10,0)NULL,
+    Menge NUMERIC(10,0)NOT NULL,
     Preis NUMERIC(10,2) NOT NULL,
     CONSTRAINT PK_Position PRIMARY KEY (BestellungID, PosID)
 );
 
 CREATE TABLE Lieferung (
-    BestellungID BIGINT NOT NULL,
-    PosID BIGINT NOT NULL,
-    LieferAdrID INT NOT NULL,
+    BestellungID NUMERIC(19,0)NOT NULL,
+    PosID NUMERIC(19,0)NOT NULL,
+    LieferAdrID NUMERIC(10,0)NOT NULL,
     LieferDienstID VARCHAR(30) NOT NULL,
     LieferDatum DATE NOT NULL,
     CONSTRAINT PK_Lieferung PRIMARY KEY (BestellungID, PosID, LieferAdrID, LieferDienstID)
@@ -121,32 +121,32 @@ CREATE TABLE LieferDienst (
     CONSTRAINT PK_LieferDienst PRIMARY KEY (LieferDienstID)
 );
 
-ALTER TABLE Kunde ADD CONSTRAINT FK_Kunde_VereinsPartnerID FOREIGN KEY (VereinsPartnerID) REFERENCES VereinsPartner (VereinsPartnerID);
-
-ALTER TABLE Wohnort ADD CONSTRAINT FK_Wohnort_KundeID FOREIGN KEY (KundeID) REFERENCES Kunde (KundeID);
-
-ALTER TABLE Lieferadresse ADD CONSTRAINT FK_Lieferadresse_KundeID FOREIGN KEY (KundeID) REFERENCES Kunde (KundeID);
-
-ALTER TABLE VereinsPartner ADD CONSTRAINT FK_VereinsPartner_KundeIDVerein FOREIGN KEY (KundeIDVerein) REFERENCES Kunde (KundeID);
-
-ALTER TABLE Kategorie ADD CONSTRAINT FK_Kategorie_OberKatID FOREIGN KEY (OberKatID) REFERENCES Kategorie (KatID);
-
-ALTER TABLE Produkt ADD CONSTRAINT FK_Produkt_KatID FOREIGN KEY (KatID) REFERENCES Kategorie (KatID);
-
-ALTER TABLE Bestellung ADD CONSTRAINT FK_Bestellung_KundeID FOREIGN KEY (KundeID) REFERENCES Kunde (KundeID);
-
-ALTER TABLE Bestellung ADD CONSTRAINT FK_Bestellung_AllgLieferAdrID FOREIGN KEY (AllgLieferAdrID) REFERENCES Lieferadresse (LieferAdrID);
-
-ALTER TABLE Position ADD CONSTRAINT FK_Position_BestellungID FOREIGN KEY (BestellungID) REFERENCES Bestellung (BestellungID);
-
-ALTER TABLE Position ADD CONSTRAINT FK_Position_ProduktID FOREIGN KEY (ProduktID) REFERENCES Produkt (ProduktID);
-
-ALTER TABLE Position ADD CONSTRAINT FK_Position_SpezLieferAdrID FOREIGN KEY (SpezLieferAdrID) REFERENCES Lieferadresse (LieferAdrID);
-
-ALTER TABLE Lieferung ADD CONSTRAINT FK_Lieferung_BestellungID_PosID FOREIGN KEY (BestellungID, PosID) REFERENCES Position (BestellungID, PosID);
-
-ALTER TABLE Lieferung ADD CONSTRAINT FK_Lieferung_LieferAdrID FOREIGN KEY (LieferAdrID) REFERENCES Lieferadresse (LieferAdrID);
-
-ALTER TABLE Lieferung ADD CONSTRAINT FK_Lieferung_LieferDienstID FOREIGN KEY (LieferDienstID) REFERENCES LieferDienst (LieferDienstID);
+-- ALTER TABLE Kunde ADD CONSTRAINT FK_Kunde_VereinsPartnerID FOREIGN KEY (VereinsPartnerID) REFERENCES VereinsPartner (VereinsPartnerID);
+-- 
+-- ALTER TABLE Wohnort ADD CONSTRAINT FK_Wohnort_KundeID FOREIGN KEY (KundeID) REFERENCES Kunde (KundeID);
+-- 
+-- ALTER TABLE Lieferadresse ADD CONSTRAINT FK_Lieferadresse_KundeID FOREIGN KEY (KundeID) REFERENCES Kunde (KundeID);
+-- 
+-- ALTER TABLE VereinsPartner ADD CONSTRAINT FK_VereinsPartner_KundeIDVerein FOREIGN KEY (KundeIDVerein) REFERENCES Kunde (KundeID);
+-- 
+-- ALTER TABLE Kategorie ADD CONSTRAINT FK_Kategorie_OberKatID FOREIGN KEY (OberKatID) REFERENCES Kategorie (KatID);
+-- 
+-- ALTER TABLE Produkt ADD CONSTRAINT FK_Produkt_KatID FOREIGN KEY (KatID) REFERENCES Kategorie (KatID);
+-- 
+-- ALTER TABLE Bestellung ADD CONSTRAINT FK_Bestellung_KundeID FOREIGN KEY (KundeID) REFERENCES Kunde (KundeID);
+-- 
+-- ALTER TABLE Bestellung ADD CONSTRAINT FK_Bestellung_AllgLieferAdrID FOREIGN KEY (AllgLieferAdrID) REFERENCES Lieferadresse (LieferAdrID);
+-- 
+-- ALTER TABLE Position ADD CONSTRAINT FK_Position_BestellungID FOREIGN KEY (BestellungID) REFERENCES Bestellung (BestellungID);
+-- 
+-- ALTER TABLE Position ADD CONSTRAINT FK_Position_ProduktID FOREIGN KEY (ProduktID) REFERENCES Produkt (ProduktID);
+-- 
+-- ALTER TABLE Position ADD CONSTRAINT FK_Position_SpezLieferAdrID FOREIGN KEY (SpezLieferAdrID) REFERENCES Lieferadresse (LieferAdrID);
+-- 
+-- ALTER TABLE Lieferung ADD CONSTRAINT FK_Lieferung_BestellungID_PosID FOREIGN KEY (BestellungID, PosID) REFERENCES Position (BestellungID, PosID);
+-- 
+-- ALTER TABLE Lieferung ADD CONSTRAINT FK_Lieferung_LieferAdrID FOREIGN KEY (LieferAdrID) REFERENCES Lieferadresse (LieferAdrID);
+-- 
+-- ALTER TABLE Lieferung ADD CONSTRAINT FK_Lieferung_LieferDienstID FOREIGN KEY (LieferDienstID) REFERENCES LieferDienst (LieferDienstID);
 
 -- COMMIT TRANSACTION QUICKDBD;

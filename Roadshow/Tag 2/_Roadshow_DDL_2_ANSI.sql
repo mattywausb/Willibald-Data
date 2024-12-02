@@ -15,8 +15,8 @@ CREATE TABLE RS_Bestellung (
     Kreditkarte VARCHAR(30) NULL,
     GueltigBis CHAR(6) NULL,
     KKFirma VARCHAR(128) NULL,
-    ProduktID INT NOT NULL,
-    Menge INT NOT NULL,
+    ProduktID NUMERIC(10,0)NOT NULL,
+    Menge NUMERIC(10,0)NOT NULL,
     Preis NUMERIC(10,2) NOT NULL,
     Rabatt NUMERIC(5,2) NULL
 );

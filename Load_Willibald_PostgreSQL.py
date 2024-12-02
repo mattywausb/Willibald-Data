@@ -49,8 +49,11 @@ def adjust_csv(file_path, temp_file_path):
         for row in reader:
             new_row = []
             for item in row:
+               # Datumsformat von 'DD.MM.YYYY' in 'YYYY-MM-DD' ändern
+                if len(item) == 10 and item.isdigit():
+                    item = f"{item[6:]}-{item[3:5]}-{item[:2]}"
                 # Dezimaltrenner ',' durch '.' ersetzen und Tausendertrennzeichen '.' entfernen
-#               item = item.replace(',', '.') #.replace('.', '')
+                item = item.replace(',', '.')  #.replace('.', '')
                 new_row.append(item)
             writer.writerow(new_row)
 
@@ -139,7 +142,7 @@ sql_files_p1 = [
 ]
 
 csv_files_p1 = [
-    os.path.join(folders_config['WEBSHOP_PERIODE_1'], 'bestellung.csv'),
+    os.path.join(folders_config['WEBSHOP_PERIODE_1'], 'vereinspartner.csv'),
     os.path.join(folders_config['WEBSHOP_PERIODE_1'], 'href_termintreue.csv'),
     os.path.join(folders_config['WEBSHOP_PERIODE_1'], 'kunde.csv'),
     os.path.join(folders_config['WEBSHOP_PERIODE_1'], 'lieferadresse.csv'),
@@ -149,8 +152,8 @@ csv_files_p1 = [
     os.path.join(folders_config['WEBSHOP_PERIODE_1'], 'produkt.csv'),
     os.path.join(folders_config['WEBSHOP_PERIODE_1'], 'produktkategorie.csv'),
     os.path.join(folders_config['WEBSHOP_PERIODE_1'], 'ref_produkt_typ.csv'),
-    os.path.join(folders_config['WEBSHOP_PERIODE_1'], 'vereinspartner.csv'),
-    os.path.join(folders_config['WEBSHOP_PERIODE_1'], 'wohnort.csv')
+    os.path.join(folders_config['WEBSHOP_PERIODE_1'], 'wohnort.csv'),
+    os.path.join(folders_config['WEBSHOP_PERIODE_1'], 'bestellung.csv')
 ]
 
 # Zuordnung von CSV-Dateinamen zu Tabellennamen
@@ -176,7 +179,7 @@ sql_files_p2 = [
 ]
 
 csv_files_p2 = [
-    os.path.join(folders_config['WEBSHOP_PERIODE_2'], 'bestellung.csv'),
+    os.path.join(folders_config['WEBSHOP_PERIODE_2'], 'vereinspartner.csv'),
     os.path.join(folders_config['WEBSHOP_PERIODE_2'], 'href_termintreue.csv'),
     os.path.join(folders_config['WEBSHOP_PERIODE_2'], 'kunde.csv'),
     os.path.join(folders_config['WEBSHOP_PERIODE_2'], 'lieferadresse.csv'),
@@ -185,8 +188,8 @@ csv_files_p2 = [
     os.path.join(folders_config['WEBSHOP_PERIODE_2'], 'position.csv'),
     os.path.join(folders_config['WEBSHOP_PERIODE_2'], 'produkt.csv'),
     os.path.join(folders_config['WEBSHOP_PERIODE_2'], 'produktkategorie.csv'),
-    os.path.join(folders_config['WEBSHOP_PERIODE_2'], 'vereinspartner.csv'),
-    os.path.join(folders_config['WEBSHOP_PERIODE_2'], 'wohnort.csv')
+    os.path.join(folders_config['WEBSHOP_PERIODE_2'], 'wohnort.csv'),
+    os.path.join(folders_config['WEBSHOP_PERIODE_2'], 'bestellung.csv')
 ]
 
 for sql_file in sql_files_p2:
@@ -204,7 +207,7 @@ sql_files_p3 = [
 ]
 
 csv_files_p3 = [
-    os.path.join(folders_config['WEBSHOP_PERIODE_3'], 'bestellung.csv'),
+    os.path.join(folders_config['WEBSHOP_PERIODE_3'], 'vereinspartner.csv'),
     os.path.join(folders_config['WEBSHOP_PERIODE_3'], 'kunde.csv'),
     os.path.join(folders_config['WEBSHOP_PERIODE_3'], 'lieferadresse.csv'),
     os.path.join(folders_config['WEBSHOP_PERIODE_3'], 'lieferdienst.csv'),
@@ -212,8 +215,8 @@ csv_files_p3 = [
     os.path.join(folders_config['WEBSHOP_PERIODE_3'], 'position.csv'),
     os.path.join(folders_config['WEBSHOP_PERIODE_3'], 'produkt.csv'),
     os.path.join(folders_config['WEBSHOP_PERIODE_3'], 'produktkategorie.csv'),
-    os.path.join(folders_config['WEBSHOP_PERIODE_3'], 'vereinspartner.csv'),
-    os.path.join(folders_config['WEBSHOP_PERIODE_3'], 'wohnort.csv')
+    os.path.join(folders_config['WEBSHOP_PERIODE_3'], 'wohnort.csv'),
+    os.path.join(folders_config['WEBSHOP_PERIODE_3'], 'bestellung.csv')
 ]
 
 for sql_file in sql_files_p3:
