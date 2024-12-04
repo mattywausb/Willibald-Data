@@ -68,3 +68,18 @@ join uss_willibald.produkt pd  using (_key_produkt)
 join uss_willibald.POSITION_m ps using (_key_position)
 group by 1,2,3
 order by 1,2,3
+
+/* Planzahlen */
+select coalesce (upk.oberkategorie,p.oberkategorie) oberkategorie ,
+		bezeichnung,
+		coalesce (up.jahr,upk.jahr ) jahr,
+		quartal,
+		monat,
+		up.geplanter_produkt_umsatz ,
+		upk.geplanter_kategorie_umsatz 
+from uss_willibald._bridge_willibald 
+left join uss_willibald.produkt p using (_key_produkt)
+left join uss_willibald.umsatzplan_prod up using (_key_umsatzplan_prod)
+left join uss_willibald.umsatzplan_prodkat upk using (_key_umsatzplan_prodkat)
+where _key_umsatzplan_prod is not null or _key_umsatzplan_prodkat is not null
+ 

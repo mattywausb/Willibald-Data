@@ -16,4 +16,9 @@ CREATE TABLE uss_willibald._bridge_willibald (
 	,_key_produkt numeric(10)
 	,_key_produkt_m numeric(10)
 	,_key_vereinspartner varchar(30)
+	,_key_umsatzplan_prod varchar(128)
+	,_key_umsatzplan_prodkat varchar(128)
 );
+
+-- alter table uss_willibald._bridge_willibald add column 	_key_umsatzplan_prod varchar(128);
+-- alter table uss_willibald._bridge_willibald add column 	_key_umsatzplan_prodkat varchar(128);

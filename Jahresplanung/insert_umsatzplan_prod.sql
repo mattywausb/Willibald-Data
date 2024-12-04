@@ -1,0 +1,22 @@
+/*
+ * select produktid, bezeichnung from DVF_USS_DEMO.WILLIBALD_SHOP_P1.PRODUKT
+ */
+
+INSERT INTO DVF_USS_DEMO.JAHRESPLANUNG.UMSATZPLAN_PROD
+(PRODUKTID, JAHR, QUARTAL, GEPLANTER_PRODUKT_UMSATZ)
+VALUES
+ (99,   2022, 1,5000) -- weißkohl
+,(99,   2022, 2,5500)
+,(99,   2022, 3,400)
+,(99,   2022, 4,4400)
+,(62,   2022, 1,600) -- Rotkohl
+,(62,   2022, 2,300)
+,(62,   2022, 3,400)
+,(62,   2022, 4,700)
+;
+
+/*
+Select *
+from DVF_USS_DEMO.WILLIBALD_SHOP_P1.KATEGORIE
+where oberkatid is null;
+ */
