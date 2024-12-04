@@ -79,9 +79,9 @@ def load_csv_to_postgres(file_path, table_name, schema_name):
         log_and_execute(cursor, f"SET search_path TO {schema_name}")
 
         # Lade die Daten aus der temporären Datei in die Tabelle
-        with open(temp_file_path, 'r') as f:
+        with open(temp_file_path, 'r', encoding='utf-8') as f:
             cursor.copy_expert(f"""
-                COPY {table_name} FROM STDIN WITH (FORMAT csv, DELIMITER ';', HEADER TRUE)
+                COPY {table_name} FROM STDIN WITH (FORMAT csv, DELIMITER ';', HEADER TRUE, ENCODING 'UTF8')
             """, f)
 
         print(f"{file_path} erfolgreich in {table_name} geladen.")
