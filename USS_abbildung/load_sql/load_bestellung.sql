@@ -4,13 +4,15 @@
 delete from uss_willibald._bridge_willibald 
 where stage ='bestellung';
 
-insert into uss_willibald._bridge_willibald (stage,_key_bestellung,_key_bestellung_m,_key_kunde,_key_lieferadresse) 
+insert into uss_willibald._bridge_willibald (stage,_key_bestellung,_key_bestellung_m,_key_kunde,_key_lieferadresse,_key_vereinspartner) 
 	select distinct 'bestellung'
 		, bestellungid 
 		, bestellungid 
-		, kundeid
-		, allglieferadrid
-	from willibald_shop_p1.bestellung;
+		, k.kundeid
+		, b.allglieferadrid
+		, k.vereinspartnerid 
+	from willibald_shop_p1.bestellung b
+	left join willibald_shop_p1.kunde k on k.kundeid = b.kundeid 
 
 /* 
  * select * from 	 uss_willibald._bridge_willibald where stage='bestellung'

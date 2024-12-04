@@ -4,7 +4,8 @@
 delete from uss_willibald._bridge_willibald 
 where stage ='position';
 
-insert into uss_willibald._bridge_willibald (stage,_key_position,_key_position_m,_key_bestellung,_key_produkt ,_key_lieferadresse,_key_kunde) 
+insert into uss_willibald._bridge_willibald (stage,_key_position,_key_position_m,_key_bestellung
+											,_key_produkt ,_key_lieferadresse,_key_kunde,_key_vereinspartner) 
 	select distinct 'position'
 		, p.bestellungid||'-->'||posid 
 		, p.bestellungid||'-->'||posid 
@@ -12,8 +13,10 @@ insert into uss_willibald._bridge_willibald (stage,_key_position,_key_position_m
 		, produktid
 		, allglieferadrid 
 		, b.kundeid 
+		, k.vereinspartnerid 
 	from willibald_shop_p1.position p 
-	join willibald_shop_p1.bestellung b on b.bestellungid =p.bestellungid;
+	join willibald_shop_p1.bestellung b on b.bestellungid =p.bestellungid
+	left join willibald_shop_p1.kunde k on k.kundeid = b.kundeid ;
 
 /* 
  * select * from 	 uss_willibald._bridge_willibald where stage='position'
@@ -22,11 +25,14 @@ insert into uss_willibald._bridge_willibald (stage,_key_position,_key_position_m
 truncate table uss_willibald.position;
 
 INSERT INTO uss_willibald.position
-( _key_position, posid, was_delivered)
+( _key_position, posid, was_delivered,ad_landing,menge,betrag_position)
 select 
 	 p.bestellungid||'-->'||p.posid 
 	,p.posid
 	,(l.posid is not null) as was_delivered
+	,(mod(p.bestellungid+p.posid,17)>3) as ad_landing
+	,menge
+	,preis 
 from  willibald_shop_p1.position p
 left join WILLIBALD_SHOP_P1.LIEFERUNG l on l.bestellungid =p.bestellungid and l.posid =p.posid;
 
