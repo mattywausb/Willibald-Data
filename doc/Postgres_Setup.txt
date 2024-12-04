@@ -1,0 +1,103 @@
+Willibald source system
+
+Database installation guide 
+
+Intention 
+Willibald  source database is needed for several cimt scenarios. But manual installation is very complex
+
+
+Development Goal
+A python script is needed for an installation at the press of a button.
+
+
+Prerequisites
+
+Target Database 
+- 2 databases has to be supported: Snowflake and PostgreSQL.
+
+DDL compatibility
+- DDLs should work with PostgreSQL and Snowflake as well (ANSI DDL)
+
+Loading 
+- CSV Bulk Load needed for fast loading
+- Reference CSV data should also be loaded
+
+Willibald sources
+- Existing source DDLs and CSV files should not be touched, new DDLs with postfix _ANSI.sql should be created
+
+Configuration
+- DB Connection, Schemata and Pathes should be outsourced in separate config file
+
+Data delivery periods
+- The 3 data deliveries for Webshop and Roadshow should be loaded at the same time in different schemas
+- Views for Webshop and Roadshow in extra schema required pointing on one of the period tables 
+
+
+CSV File - Table mapping
+- not all CSV files has the same name as the tables to be loaded, mapping needed
+
+Date an number formats
+- german date format in CSV has to be interpreted in the correct format
+- german decimal separator in CSV files must be  in the correct format
+
+Logging
+- executed sql / commands has to be logged in terminal 
+
+Encoding
+- CSV file encoding of UTF-8-BOM has be interpreted in the right way
+
+
+
+1. Connect to the DB Instance as DBA (mostly user "postgres")
+   
+2. Install users by adapting passwords and executing following scripts in
+    /resources/ddl_pg/database_creation/users
+   
+   - owner_dwh.sql
+   - process_user_metadata.sql
+   - process_user_raw_vault.sql
+   - process_user_business_vault.sql
+   - process_user_mart_general.sql
+   - access_role_mart_general.sql
+   - access_role_monitoring.sql
+   
+3. Proceed with /resources/ddl_pg/database_creation/create_database.sql
+   
+   - Modify tablespace and database name if necessary
+   - Execute
+
+4. add pgcyprto extention to public schema
+    - select the schema "public" in the new data base
+    - execute: CREATE EXTENSION IF NOT EXISTS pgcrypto;
+   
+5. Connect to the DB Instance as "owner_dwh"
+   
+6. Create the basic schemas by executing from /resources/ddl_pg/
+   
+   - database_creation/schema_STAGE_RVLT.sql
+   - database_creation/schema_STAGE_BVLT.sql
+   - monitoring/schema_MONITORING.sql
+   - metadata/schema_MONITORING.sql
+
+7. Grant the required permissions to the users by executing  from /resources/ddl_pg/database_creation/users/
+   
+   - grant_schema_defaults_basics.sql
+   - grant_schema_defaults_generic.sql
+
+8. set configuration for direct python execution
+   - copy directory "/config_template"  as "/config"  in the root of the project (config is ignored by git repo)
+   - modify the connection_pg.ini to contain all correct passwords an users
+   - modify the "dvf.ini" : "ddl_root_path" to contain the full path to the resources/ddl_pg directory
+   
+9. run lib/cimtjobinstance.py
+   This will establish the "metadata" schema and "job_instance_status" table including some sample data in the databased
+ 
+10. run  processes/jobless_deployment/__main__.py
+   This will deploy all basic udf functions an the monitoring schema to the database
+   
+   You are ready to run
+
+For a first check, if everything is place, run processes/zzDemo/zzDemo_aaa_p1/__main__.py
+This should create a zzsource_demo and a zz_rvlt_demo schema including tables and should populate it with data.
+   
+   
