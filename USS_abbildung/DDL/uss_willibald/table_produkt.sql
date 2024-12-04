@@ -11,5 +11,6 @@ CREATE TABLE uss_willibald.produkt (
 	pflanzort varchar(128) NOT NULL,
 	pflanzabstand varchar(128) NOT NULL,
 	kategorie varchar(128),
+	Zehrgruppe varchar(128),
 	oberkategorie varchar(128)
 );

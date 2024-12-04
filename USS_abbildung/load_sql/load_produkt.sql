@@ -17,7 +17,7 @@ insert into uss_willibald._bridge_willibald (stage,_key_produkt,_key_produkt_m)
 truncate table uss_willibald.produkt;
 
 INSERT INTO uss_willibald.produkt
-(_key_produkt, produktid, bezeichnung, umfang, preis, pflanzort, pflanzabstand, pflanztyp,kategorie, oberkategorie)
+(_key_produkt, produktid, bezeichnung, umfang, preis, pflanzort, pflanzabstand, pflanztyp,kategorie, zehrgruppe, oberkategorie)
 select 
 produktid,
 produktid, 
@@ -28,10 +28,12 @@ pflanzort,
 pflanzabstand,
 pt.bezeichnung as pflanztyp, 
 k1.name ,
-k2.name 
+k2.name, 
+k3.name 
 from  willibald_shop_p1.produkt p
 join willibald_shop_p1.kategorie k1 on k1.katid =p.katid 
-join willibald_shop_p1.kategorie k2 on k2.katid =k1.oberkatid 
+left join willibald_shop_p1.kategorie k2 on k2.katid =k1.oberkatid 
+left join willibald_shop_p1.kategorie k3 on k3.katid =k2.oberkatid 
 join WILLIBALD_SHOP_P1.REF_PRODUKT_TYP pt on pt.typ =p.typ ;
 
 /* 
