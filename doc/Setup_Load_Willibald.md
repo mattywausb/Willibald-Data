@@ -34,7 +34,7 @@ A python script is needed for an installation at the press of a button.
 
 - Views for Webshop and Roadshow in extra schema required pointing on one of the needed period tables
   
-![Logo der Firma Willibald](Grafik/schemata.png)
+![Schema_picture](Grafik/schemata.png)
 
 ### Cleanup
 - all schema has to be dropped before creation and loading (cleanup) 
@@ -57,10 +57,11 @@ A python script is needed for an installation at the press of a button.
 - Willibald-Data / Load_Willibald_PostgreSQL.py
 - Willibald-Data / Load_Willibald_Snowflake.py
 - Willibald-Data / doc / Setup_Load_Willbald.md
+- Willibald-Data / Grafik / schemas.md
 - Willibald-Data / config_template / db_postgresql_config.json
 - Willibald-Data / config_template / db_snowflake_config.json
 - Willibald-Data / config_template / folder_config.json
-- Willibald-Data / config_template / chemas_config.json
+- Willibald-Data / config_template / schemas_config.json
 - Willibald-Data / config /
 - Willibald-Data / Webshop / Testdaten Periode 1 / _Testdaten_DDL_ANSI.sql
 - Willibald-Data / Webshop / Testdaten Periode 1 / _Testdaten_DDL_1_ANSI.sql
