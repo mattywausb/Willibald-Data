@@ -32,10 +32,10 @@ A python script is needed for an installation at the press of a button.
  -  3 data delivery schemas for Roadshow 
 
 2 schemas for the views pointing to the current day/period tables:
- -  1 schema for Webshop and 
+ -  1 schema for Webshop and
  -  1 schema for Roadshow 
   
-![Schema_picture](Grafik/schemata.JPG)
+![Schema_picture](Grafik/schemata.png)
 
 ### Cleanup
 - all schema has to be dropped before creation and loading (cleanup) 
