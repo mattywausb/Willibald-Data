@@ -35,7 +35,7 @@ A python script is needed for an installation at the press of a button.
  -  1 schema for Webshop and
  -  1 schema for Roadshow 
   
-![Schema_picture](Grafik/schemas.png)
+![Schema_picture](https://github.com/upeschl-cimt/willibald_db_ansi/blob/main/doc/Grafik/schemas.png)
 
 ### Cleanup
 - all schema has to be dropped before creation and loading (cleanup) 
