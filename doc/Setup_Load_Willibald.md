@@ -33,7 +33,7 @@ A python script is needed for an installation at the press of a button.
  should be loaded at the same time in 6 schemas and its tables
 
 - Views for Webshop and Roadshow in extra schema required pointing on one of the needed period tables
-![Logo der Firma Willibald](Grafik/schemata.jpg)
+![Logo der Firma Willibald](Grafik/schemata.png)
 
 ### Cleanup
 - all schema has to be dropped before creation and loading (cleanup) 
