@@ -10,45 +10,45 @@ A python script is needed for an installation at the press of a button.
 
 ## Prerequisites
 
-###Target Database 
+### Target Database 
 - The script should work for Snowflake and PostgreSQL.
 
-###DDL compatibility
+### DDL compatibility
 - DDLs should work with PostgreSQL and Snowflake as well (ANSI DDL)
 
-###Loading 
+### Loading 
 - CSV Bulk Load needed for fast loading
 - Reference CSV data should also be loaded
 
-###Willibald sources
+### Willibald sources
 - Existing source DDLs and CSV files should not be touched, new DDLs with postfix _ANSI.sql should be created
 
-###Configuration
+### Configuration
 - DB Connection, Schemata and file directories should be outsourced in separate config file
 
-###Data delivery periods
+### Data delivery periods
  -  3 data deliveries for Webshop and 
  -  3 data deliveries for WebshopRoadshow 
  
  should be loaded at the same time in 6 schemas and its tables
- 
+
 - Views for Webshop and Roadshow in extra schema required pointing on one of the needed period tables
 ![Logo der Firma Willibald](Grafik/schemata.jpg)
 
-###Cleanup
+### Cleanup
 - all schema has to be dropped before creation and loading (cleanup) 
 
-###CSV File - Table mapping
+### CSV File - Table mapping
 - not all CSV files has the same name as the tables to be loaded, mapping needed
 
-###Date an number formats in CSV files
+### Date an number formats in CSV files
 - german date format in CSV has to be interpreted in the correct format
 - german decimal separator in CSV files must be  in the correct format
 
-###Logging
+### Logging
 - executed sql  has to be logged in terminal 
 
-###Encoding
+### Encoding
 - CSV file encoding of UTF-8-BOM has be interpreted in the right way
 
 
