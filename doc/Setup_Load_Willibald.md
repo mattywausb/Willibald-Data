@@ -27,12 +27,13 @@ A python script is needed for an installation at the press of a button.
 - DB Connection, Schemata and file directories should be outsourced in separate config file
 
 ### Data delivery periods
- -  3 data deliveries for Webshop and 
- -  3 data deliveries for WebshopRoadshow 
- 
- should be loaded at the same time in 6 schemas and its tables
+6 schemas for the tables to be load:
+ -  3 data delivery schemas for Webshop and 
+ -  3 data delivery schemas for Roadshow 
 
-- Views for Webshop and Roadshow in extra schema required pointing on one of the needed period tables
+2 schemas for the views pointing to the current day/period tables:
+ -  1 schema for Webshop and 
+ -  1 schema for Roadshow 
   
 ![Schema_picture](Grafik/schemata.png)
 
