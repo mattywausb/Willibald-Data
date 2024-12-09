@@ -54,7 +54,7 @@ A python script is needed for an installation at the press of a button.
 - CSV file encoding of UTF-8-BOM has be interpreted in the right way
 
 
-## New created files and folders
+## New added files and folders 
 - Willibald-Data / Load_Willibald_PostgreSQL.py
 - Willibald-Data / Load_Willibald_Snowflake.py
 - Willibald-Data / doc / Setup_Load_Willbald.md
