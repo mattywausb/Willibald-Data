@@ -35,7 +35,7 @@ A python script is needed for an installation at the press of a button.
  -  1 schema for Webshop and
  -  1 schema for Roadshow 
   
-![Schema der Firma Willibald](../Grafik/schemas.png)
+![Schema_picture](Grafik/schemas.png)
 
 ### Cleanup
 - all schema has to be dropped before creation and loading (cleanup) 
@@ -78,6 +78,7 @@ A python script is needed for an installation at the press of a button.
 - Willibald-Data / Roadshow / Tag 1 / _Roadshow_DDL_ANSI.sql
 - Willibald-Data / Roadshow / Tag 2 / _Roadshow_DDL_2_ANSI.sql
 - Willibald-Data / Roadshow / Tag 3 / _Roadshow_DDL_3_ANSI.sql
+
 
 ## APPROACH
 1. Clone Repository
