@@ -81,6 +81,7 @@ A python script is needed for an installation at the press of a button.
 
 ## APPROACH
 1. Clone Repository
+
 2. Copy config files from
    Willibald-Data / config_template -> Willibald-Data / config 
    
