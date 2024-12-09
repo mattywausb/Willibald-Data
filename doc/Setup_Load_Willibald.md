@@ -79,17 +79,18 @@ A python script is needed for an installation at the press of a button.
 - Willibald-Data / Roadshow / Tag 2 / _Roadshow_DDL_2_ANSI.sql
 - Willibald-Data / Roadshow / Tag 3 / _Roadshow_DDL_3_ANSI.sql
 
-
-1. Copy config files from 
+## APPROACH
+1. Clone Repository
+2. Copy config files from
    Willibald-Data / config_template -> Willibald-Data / config 
    
-2. Add or modify values to  your environment values
+3. Add or modify values to  your environment values
    - connection for Snowflake (db_snowflake_config.json)
    - connection for Postgresql (db_postgresql_config.json)
    - folder (folder_config.json)
    - schema (schemas_config.json)
    
-3. run python script
+4. run python script
    
    - Snowflake  (Willibald-Data / Load_Willibald_Snowflake.py)
    - Postgresql (Willibald-Data / Load_Willibald_PostgreSQL.py)
