@@ -82,4 +82,20 @@ left join uss_willibald.produkt p using (_key_produkt)
 left join uss_willibald.umsatzplan_prod up using (_key_umsatzplan_prod)
 left join uss_willibald.umsatzplan_prodkat upk using (_key_umsatzplan_prodkat)
 where _key_umsatzplan_prod is not null or _key_umsatzplan_prodkat is not null
- 
+
+
+/* Monats Planzahlen + Umsatzzahlen */
+select 
+	coalesce(upk.oberkategorie,pd.oberkategorie) oberkategorie
+	,coalesce(upk.jahr,year(b.bestelldatum)) jahr
+	,coalesce(upk.monat ,month(b.bestelldatum)) monat
+	,sum(upk.geplanter_kategorie_umsatz) geplanter_kategorie_umsatz
+	,sum(ps_m.preis) umsatz
+ from uss_willibald._bridge_willibald 
+left join uss_willibald.bestellung b using (_key_bestellung)
+left join uss_willibald.position_m ps_m using (_key_position_m)
+left join uss_willibald.produkt pd using (_key_produkt)
+left join uss_willibald.umsatzplan_prodkat upk using (_key_umsatzplan_prodkat)
+where _key_umsatzplan_prodkat is not null or _key_position is not null
+group by 1,2,3
+order by 1,2,3
