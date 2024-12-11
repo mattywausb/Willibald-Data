@@ -10,51 +10,49 @@ A python script is needed for an installation at the press of a button.
 
 ## Prerequisites
 
-### Target Database 
+### Target Database:
 - The script should work for Snowflake and PostgreSQL.
 
-### DDL compatibility
+### DDL compatibility:
 - DDLs should work with PostgreSQL and Snowflake as well (ANSI DDL)
 
-### Loading 
-- CSV Bulk Load needed for fast loading
-- Reference CSV data should also be loaded
+- Loading:
+-- CSV Bulk Load needed for fast loading
+-- Reference CSV data should also be loaded
 
-### Willibald sources
-- Existing source DDLs and CSV files should not be touched, new DDLs with postfix _ANSI.sql should be created
+- Willibald sources: Existing source DDLs and CSV files should not be touched, new DDLs with postfix _ANSI.sql should be created
 
-### Configuration
-- DB Connection, Schemata and file directories should be outsourced in separate config file
+- Configuration: DB Connection, Schemata and file directories should be outsourced in separate config file
 
-### Data delivery periods
-6 schemas for the tables to be load:
- -  3 data delivery schemas for Webshop and 
- -  3 data delivery schemas for Roadshow 
+- Data delivery periods:
+-- 6 schemas for the tables to be load:
+ ---  3 data delivery schemas for Webshop and
+ ---  3 data delivery schemas for Roadshow
 
-2 schemas for the views pointing to the current day/period tables:
- -  1 schema for Webshop and
- -  1 schema for Roadshow 
+-- 2 schemas for the views pointing to the current day/period tables:
+ ----  1 schema for Webshop and
+ ----  1 schema for Roadshow
   
-![Schema_picture](Grafik/schemas.png)
+![Schema_picture](../Grafik/schemas.png)
 
-### Cleanup
-- all schema has to be dropped before creation and loading (cleanup) 
+- Cleanup:
+-- all schema has to be dropped before creation and loading (cleanup)
 
-### CSV File - Table mapping
+### CSV File - Table mapping:
 - not all CSV files has the same name as the tables to be loaded, mapping needed
 
-### Date an number formats in CSV files
+### Date an number formats in CSV files:
 - german date format in CSV has to be interpreted in the correct format
 - german decimal separator in CSV files must be  in the correct format
 
-### Logging
+### Logging:
 - executed sql  has to be logged in terminal 
 
-### Encoding
+### Encoding:
 - CSV file encoding of UTF-8-BOM has be interpreted in the right way
 
 
-## New added files and folders 
+## New added files and folders
 - Willibald-Data / Load_Willibald_PostgreSQL.py
 - Willibald-Data / Load_Willibald_Snowflake.py
 - Willibald-Data / doc / Setup_Load_Willbald.md
