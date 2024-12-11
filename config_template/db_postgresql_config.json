@@ -1,0 +1,7 @@
+{
+    "POSTGRES_HOST": "your_account",
+    "POSTGRES_USER": "your_username",
+    "POSTGRES_PASSWORD": "your_password",
+    "POSTGRES_PORT": "your_warehouse",
+    "POSTGRES_DATABASE": "your_database"
+}
