@@ -12,26 +12,29 @@ Willibald DB installation is very complex.
 Why? 
 - DDLs and DML's  are coded for MS SQl Server.
 - Some DDL's are missing. 
-- CSV files uses german date and dedicmal separator format.
+- CSV files uses german date and decimal separator format.
 - several periods of data with different tables and columns has to be loaded
-Goal : ANSI SQL and a python script would be very helpful for a fast installation on Snowflake and PostgreSQL DB at the press of a button.
+
+Goal : ANSI SQL and a python script would be very helpful for a fast installation on **Snowflake** and **PostgreSQL** DB.
 
 
-# Prerequisites
-- Target Database: The script should work for Snowflake and PostgreSQL.
-- DDL compatibility: DDLs should work with PostgreSQL and Snowflake as well -> ANSI DDL's Creation
+# Requirements
+
+### Willibald Database
+- Target Database: The script should work for **Snowflake** and **PostgreSQL**.
+- DDL compatibility: DDLs should work with PostgreSQL and Snowflake as well -> **ANSI** DDL's Creation
 - Cleanup: all configed schema has to be dropped before creation and loading 
 - Loading: Fast loading needed -> CSV Bulk Load
-- CSV Files: Reference CSV data should also be loaded, no DDL in original sources -> DDL Creation
-- CSV Files: Some CSV files names differ to target tables names -> mapping needed
-- CSV Files: German date format in  has to be interpreted in the correct format
-- CSV Files: German decimal separator in CSV files must be  in the correct format
-- CSV files: Encoding of UTF-8-BOM has be interpreted in the right way
 - Logging: Executed sql  has to be logged in terminal 
-
 - Willibald sources: Existing source DDLs and CSV files should not be touched, new DDLs with postfix _ANSI.sql should be created
-
 - Configuration: DB Connection, Schemata and file directories should be outsourced in separate config file
+
+CSV Files:
+- Reference CSV data should also be loaded, no DDL in original sources -> DDL Creation
+- Some CSV files names differ to target tables names -> mapping needed
+- German date format in  has to be interpreted in the correct format
+- German decimal separator in CSV files must be  in the correct format
+- Encoding of UTF-8-BOM has be interpreted in the right way
 
 Data delivery periods:
 - 6 schemas for the tables to be load:
@@ -40,24 +43,23 @@ Data delivery periods:
 
 - 2 schemas for the views pointing to the current day/period tables:
   - 1 schema for Webshop and
-  -  1 schema for Roadshow
+  - 1 schema for Roadshow
   
-![Schema_picture](../Grafik/schemas.png)
+<img src="../Grafik/schemas.png" alt="Schema_picture" width="300">
 
 
 
 # Installation Guide
-## Requirements
+### Requirements
 - python 3.10 or higher must be available
-- please install missing python packages on demand (via python pip or equivalent package manager)
+- please install missing python packages on demand
+  - pip install psycopg2 (PostgreSQL)
+  - pip install snowflake-connector-python (Snowflake)
+  - pip install pandas (CSV - Load)
 - A text editor (hopefully capable of JSON syntax highlitging and hierarchie folding)
 
-If you want to modify, debug or extend the dvpd toolset or documentation
-- An text editor soupporting markdown documents
-- "Draw.io" for opitmal view of diagrams
-- A python ide
 
-Installation Steps
+### Installation Steps
 
 1. Clone Repository
 
@@ -65,17 +67,19 @@ Installation Steps
    Willibald-Data / config_template -> Willibald-Data / config 
    
 3. Add or modify values to  your environment values
-   - connection for Snowflake (db_snowflake_config.json)
-   - connection for Postgresql (db_postgresql_config.json)
-   - folder (folder_config.json)
-   - schema (schemas_config.json)
+   - db_snowflake_config.json: connection for Snowflake 
+   - db_postgresql_config.json: connection for Postgresql 
+   - folder_config.json: folders 
+   - schemas_config.json: schemas 
+  
+# Usage Guide
    
-4. run python script
+1. Run python script
    
    - Snowflake  (Willibald-Data / Load_Willibald_Snowflake.py)
    - Postgresql (Willibald-Data / Load_Willibald_PostgreSQL.py)
   
-   
+# Appendix   
 Added files and folders
 ```
 - Willibald-Data / Load_Willibald_PostgreSQL.py
