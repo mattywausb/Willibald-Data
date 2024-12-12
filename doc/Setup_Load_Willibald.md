@@ -10,7 +10,7 @@ Creative Commons License [CC BY-ND 4.0](https://creativecommons.org/licenses/by-
 # Introduction 
 Willibald DB installation is very complex. 
 Why? 
-- DDLs and DML's  are coded for MS SQl Server.
+- DDLs and DML's  are coded for MS SQL Server.
 - Some DDL's are missing. 
 - CSV files uses german date and decimal separator format.
 - several periods of data with different tables and columns has to be loaded
