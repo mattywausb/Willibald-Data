@@ -11,8 +11,8 @@ insert into uss_willibald._bridge_willibald (stage,_key_bestellung,_key_bestellu
 		, k.kundeid
 		, b.allglieferadrid
 		, k.vereinspartnerid 
-	from willibald_shop_p1.bestellung b
-	left join willibald_shop_p1.kunde k on k.kundeid = b.kundeid 
+	from willibald_xt.bestellung b
+	left join willibald_xt.kunde k on k.kundeid = b.kundeid ;
 
 /* 
  * select * from 	 uss_willibald._bridge_willibald where stage='bestellung'
@@ -27,7 +27,7 @@ select
 	bestellungid ,
 	bestelldatum ,
 	wunschdatum ,
-from  willibald_shop_p1.bestellung;
+from  willibald_xt.bestellung;
 
 /* 
  * select * from 	 uss_willibald.bestellung
@@ -37,29 +37,11 @@ truncate table uss_willibald.bestellung_m;
 
 INSERT INTO uss_willibald.bestellung_m
 (_KEY_BESTELLUNG_M, RABATTBETRAG, MITGLIEDSBONUS, GESAMTBETRAG, UMSATZSTEUERNUMBER)
-with positionssumme as (
-select p.bestellungid , sum(p.preis ) summe_positionen
-from willibald_shop_p1.POSITION p
-group by 1
-)
-, rabatt_und_bonus as (
-select 
-	b.bestellungid ,
-	RABATT,
-	summe_positionen,
-	ps.summe_positionen*rabatt/100 as  RABATTBETRAG,
-	case when v.rabatt1 is not null 
-		then v.rabatt1 /2.0 
-		else 0 end 			  as MITGLIEDSBONUS
-from  willibald_shop_p1.bestellung b
-join positionssumme ps on ps.bestellungid = b.bestellungid 
-left join willibald_shop_p1.vereinspartner v on v.kundeidverein =b.kundeid 
-)
 select 
 	bestellungid
 	,rabatt
 	,mitgliedsbonus
-	,round(greatest(summe_positionen-rabattbetrag-mitgliedsbonus,0)*1.19,2) as GESAMTBETRAG
-	,round(greatest(summe_positionen-rabattbetrag-mitgliedsbonus,0)*0.19,2) as UMSATZSTEUER
-from rabatt_und_bonus
+	,GESAMTBETRAG
+	, UMSATZSTEUER
+from willibald_xt.bestellung
 ;

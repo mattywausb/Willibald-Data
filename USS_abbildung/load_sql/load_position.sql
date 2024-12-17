@@ -10,13 +10,14 @@ insert into uss_willibald._bridge_willibald (stage,_key_position,_key_position_m
 		, p.bestellungid||'-->'||posid 
 		, p.bestellungid||'-->'||posid 
 		, p.bestellungid 
-		, produktid
+		, p.produktid
 		, allglieferadrid 
 		, b.kundeid 
 		, k.vereinspartnerid 
-	from willibald_shop_p1.position p 
-	join willibald_shop_p1.bestellung b on b.bestellungid =p.bestellungid
-	left join willibald_shop_p1.kunde k on k.kundeid = b.kundeid ;
+	from willibald_xt.position p 
+	join willibald_xt.bestellung b on b.bestellungid =p.bestellungid
+	left join willibald_xt.kunde k on k.kundeid = b.kundeid 
+	left join willibald_xt.produkt pd on pd.produktid = p.produktid ;
 
 /* 
  * select * from 	 uss_willibald._bridge_willibald where stage='position'
@@ -29,12 +30,11 @@ INSERT INTO uss_willibald.position
 select 
 	 p.bestellungid||'-->'||p.posid 
 	,p.posid
-	,(l.posid is not null) as was_delivered
-	,(mod(p.bestellungid+p.posid,17)>3) as ad_landing
+	,was_delivered
+	,ad_landing
 	,menge
 	,preis 
-from  willibald_shop_p1.position p
-left join WILLIBALD_SHOP_P1.LIEFERUNG l on l.bestellungid =p.bestellungid and l.posid =p.posid;
+from  willibald_xt.position p;
 
 /* 
  * select * from 	 uss_willibald.position
@@ -49,7 +49,7 @@ select
 	bestellungid||'-->'||posid 
 	,menge
 	,preis 
-from  willibald_shop_p1.position;
+from  willibald_xt.position;
 
 /* 
  * select * from 	 uss_willibald.position_m

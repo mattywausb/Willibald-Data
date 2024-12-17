@@ -22,3 +22,4 @@ CREATE TABLE uss_willibald._bridge_willibald (
 
 -- alter table uss_willibald._bridge_willibald add column 	_key_umsatzplan_prod varchar(128);
 -- alter table uss_willibald._bridge_willibald add column 	_key_umsatzplan_prodkat varchar(128);
+-- alter table uss_willibald._bridge_willibald drop column 	oberkategorie ;

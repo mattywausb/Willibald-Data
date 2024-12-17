@@ -4,7 +4,7 @@ In diesem Verzeichnis  wird beispielhaft eine Abbildung der Willibald Daten als 
 
 Das Unifed Star Schema ist eine Data Mart Modellierungsmethode, die gegenüber einem Star Schema 
 eine höhere Flexibilität/Kombinationsmöglichket der Datenabfrage ermöglichst und gleichzeitig das Risiko von
-Fehlkombinationen mit Datenverlusten oder Datenduplizierungen durch die Abfrage klein hält.
+Fehlkombinationen mit Datenverlusten oder Datenduplizierungen durch die Abfrage minimiert.
 
 ## Grundprinzipien der USS
 Für das bessere Verständnis hier die wesentlichen Grundprinzipien. Die vollständige Beschreibung des Ansatzes und der 
@@ -13,15 +13,15 @@ darin berücksichtigten Facetten der Datenrealität sind im Buch "The Unified Star
 
 ### Bridge + Tables Struktur
 - Das Unified Star Schema besteht aus beliebig vielen Datentabellen und einer zentralen Bridgetabelle
-- Die **Datentabellen** müssen eine Spalte mit einem Primärschlüssel enthalten
+- Die **Datentabellen** müssen exact eine Spalte mit einem Primärschlüssel enthalten. Bei zusammengesetzten Schlüsseln ist der Primärschlüssel künstlich zu erzeugen
 - Die weiteren Spaltern in den Datentabellen können Attribute oder Messwerte sein
-- Es gibt keinerlei Beziehungen zwischen Datentabellen. Alle Beziehungen werden durch eine entsprechende Zeile in der
-Bridgetabelle ausgedrückt
-- Die **Bridgetabelle** enthält als erste Spalte die "Stage" Spalte, die anzeigt aus welcher Quelle oder Geschäftsobjekt
+- Die **Bridgetabelle** enthält als erste Spalte die **"Stage"** Spalte, die anzeigt aus welcher Quelle oder Geschäftsobjekt
 der Inhalt der jeweiligen Bridgezeile stammt
 - Die weiteren Spalten enthalten den Schlüssel zu einer der Datentabellen (in der Regel also 1 Spalte pro Datentabelle)
 - In der Bridgetabelle gibt es für jede Stage einen kompletten Satz an Datenzeilen, wobei nur Spalten zu 
 Datentabellen gefüllt sind, deren Kombination aus dieser Stage abgelesen werden kann
+- Es gibt keinerlei Beziehungen zwischen Datentabellen. Alle Beziehungen werden durch Zeilen der
+Bridgetabelle ausgedrückt. 
 
 ### Datenabruf
 Um Daten aus dem Modell abzurufen, wird die Bridgetabelle nur mit den Datentabellen gejoined, in denen die Attribute und Werte
@@ -55,8 +55,10 @@ Im Willibald Datenbestand ist dies der Fall bei:
 - Bestellung, für die kein Kunde existiert 
 
 Die USS bietet in der Bridge aufgrund ihrere Funktionsprinzips für alle Elemente einer Tabelle mindestens einen Datensatz an,
-da dieser aus der Quelle selbst erzeugt wird. Beim Join der Daten mit der Bridge hängt es einzig  den "Left" Joins ab, ob diese
-Datensätze in der Ergebnismenge ankommen.
+da dieser aus der Quelle selbst erzeugt wird. Beim Join der Daten mit der Bridge 
+reguliert der Einstatz von "Left" Joins, 
+ob die Gesamtmenge auf Datenkombinationen beschränkt wird, zu denen die jeweilige Datentabelle
+Information verfügbar hat.
 
 ### "Fan Trap" 
 Die "Fan Trap" kann überall dort auftreten, wo:

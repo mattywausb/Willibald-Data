@@ -8,7 +8,7 @@ insert into uss_willibald._bridge_willibald (stage,_key_kunde,_key_vereinspartne
 	select distinct 'kunde'
 		, kundeid 
 		,vereinspartnerid 
-	from willibald_shop_p1.kunde;
+	from willibald_xt.kunde;
 
 /* 
  * select * from 	 uss_willibald._bridge_willibald
@@ -17,15 +17,15 @@ insert into uss_willibald._bridge_willibald (stage,_key_kunde,_key_vereinspartne
 truncate table uss_willibald.kunde;
 
 INSERT INTO uss_willibald.kunde
-(_key_kunde, kundeid, vorname, name, geschlecht, geburtsdatum)
+(_key_kunde, kundeid, vorname, geschlecht, geburtsjahr,kreditkartenfirma)
 select 
 	kundeid ,
 	kundeid ,
 	vorname ,
-	name ,
 	geschlecht ,
-	geburtsdatum 
-from  willibald_shop_p1.kunde;
+	year(geburtsdatum )geburtsjahr ,
+	kkfirma
+from  willibald_xt.kunde;
 
 /* 
  * select * from 	 uss_willibald.kunde

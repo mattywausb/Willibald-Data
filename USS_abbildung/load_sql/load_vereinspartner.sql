@@ -8,7 +8,7 @@ insert into uss_willibald._bridge_willibald (stage,_key_vereinspartner,_key_kund
 	select distinct 'vereinspartner'
 		,vereinspartnerid 
 		, kundeidverein 
-	from willibald_shop_p1.vereinspartner;
+	from willibald_xt.vereinspartner;
 
 /* 
  * select * from 	 uss_willibald._bridge_willibald
@@ -24,7 +24,7 @@ select
 	rabatt1 ,
 	rabatt2 ,
 	rabatt3 
-from  willibald_shop_p1.vereinspartner ;
+from  willibald_xt.vereinspartner ;
 
 /* 
  * select * from 	 uss_willibald.kunde

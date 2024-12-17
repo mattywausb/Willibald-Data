@@ -16,10 +16,10 @@ insert into uss_willibald._bridge_willibald (stage,_key_lieferung,_key_lieferung
 		,p.produktid
 		,k.kundeid 
 		,k.vereinspartnerid 
-	from willibald_shop_p1.lieferung l
-	left join willibald_shop_p1.bestellung b on b.bestellungid =l.bestellungid
-	left join willibald_shop_p1.position p on p.bestellungid =l.bestellungid and p.posid=l.posid
-	left join willibald_shop_p1.kunde k on k.kundeid = b.kundeid 
+	from willibald_xt.lieferung l
+	left join willibald_xt.bestellung b on b.bestellungid =l.bestellungid
+	left join willibald_xt.position p on p.bestellungid =l.bestellungid and p.posid=l.posid
+	left join willibald_xt.kunde k on k.kundeid = b.kundeid 
 ;
 
 /* 
@@ -33,7 +33,7 @@ INSERT INTO uss_willibald.lieferung
 	select 
 	l.bestellungid||'-->'||l.posid||'-->'||l.lieferadrid ||'-->'||l.lieferdienstid 
 	,l.lieferdatum 
-	from willibald_shop_p1.lieferung l
+	from willibald_xt.lieferung l
 ;
 
 /* 
@@ -46,9 +46,8 @@ INSERT INTO uss_willibald.lieferung_m
 (_key_lieferung_m,lieferkosten)
 	select 
 	l.bestellungid||'-->'||l.posid||'-->'||l.lieferadrid ||'-->'||l.lieferdienstid 
-	,mod (coalesce(la.plz,0),7)*0.80+2 lieferkosten -- Mocking some costs with no real context
-	from willibald_shop_p1.lieferung l
-	left join willibald_shop_p1.lieferadresse la on la.lieferadrid =l.lieferadrid 
+	, lieferkosten -- Mocking some costs with no real context
+	from willibald_xt.lieferung l
 ;
 
 /* 

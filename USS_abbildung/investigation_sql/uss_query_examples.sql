@@ -5,7 +5,7 @@ use schema uss_willibald;
 select BEZEICHNUNG , sum(BETRAG_POSITION) umsatz, sum(MENGE) anzahl
 	 from _BRIDGE_WILLIBALD 
 	 join PRODUKT   		using (_key_produkt)
-left join BESTELLUNG  		using (_key_bestellung)
+--left join BESTELLUNG  		using (_key_bestellung)
 left join POSITION  		using (_key_position)
 group by 1
 order by 1;
@@ -61,11 +61,11 @@ order by 1,2
 
 
 /* summe umsatz, oberkategorie */
-select b.bestelldatum ,pd.oberkategorie ,ad_landing, sum(ps.)
+select b.bestelldatum ,pd.oberkategorie ,ad_landing, sum(ps.preis)
 from uss_willibald._bridge_willibald 
 join uss_willibald.bestellung b using (_key_bestellung)
 join uss_willibald.produkt pd  using (_key_produkt)
-join uss_willibald.POSITION_m ps using (_key_position)
+join uss_willibald.POSITION_m ps using (_key_position_m)
 group by 1,2,3
 order by 1,2,3
 
