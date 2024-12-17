@@ -8,5 +8,5 @@ CREATE TABLE uss_willibald.bestellung_m (
 	rabattbetrag numeric(16, 2),
 	mitgliedsbonus numeric(16,2),
 	gesamtbetrag numeric(16,2),
-	umsatzsteuernumber numeric(16,2)
+	umsatzsteuer numeric(16,2)
 );

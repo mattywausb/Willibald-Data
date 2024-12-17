@@ -36,7 +36,7 @@ from  willibald_xt.bestellung;
 truncate table uss_willibald.bestellung_m;
 
 INSERT INTO uss_willibald.bestellung_m
-(_KEY_BESTELLUNG_M, RABATTBETRAG, MITGLIEDSBONUS, GESAMTBETRAG, UMSATZSTEUERNUMBER)
+(_KEY_BESTELLUNG_M, RABATTBETRAG, MITGLIEDSBONUS, GESAMTBETRAG, UMSATZSTEUER)
 select 
 	bestellungid
 	,rabatt

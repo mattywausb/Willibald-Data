@@ -22,6 +22,8 @@ left join willibald_shop_p1.vereinspartner v on v.kundeidverein =b.kundeid
 select 
 	b.*
 	,mitgliedsbonus
+	,summe_positionen as summe_positionen_netto
+	,rabattbetrag
 	,round(greatest(summe_positionen-rabattbetrag-mitgliedsbonus,0)*1.19,2) as GESAMTBETRAG
 	,round(greatest(summe_positionen-rabattbetrag-mitgliedsbonus,0)*0.19,2) as UMSATZSTEUER
 from willibald_shop_p1.bestellung b
