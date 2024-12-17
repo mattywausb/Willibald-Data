@@ -20,19 +20,19 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="aQFpdgkCh0J0lMaWyOth-3" value="dim_bestellung" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=default;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;fontColor=default;fillColor=#E6E6E6;" parent="1" vertex="1">
-          <mxGeometry x="290" y="285" width="120" height="50" as="geometry" />
+          <mxGeometry x="330" y="210" width="120" height="50" as="geometry" />
         </mxCell>
         <mxCell id="aQFpdgkCh0J0lMaWyOth-4" value="dim_lieferdienst" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=default;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;fontColor=default;fillColor=#E6E6E6;" parent="1" vertex="1">
-          <mxGeometry x="900" y="400" width="120" height="50" as="geometry" />
+          <mxGeometry x="720" y="364" width="120" height="50" as="geometry" />
         </mxCell>
         <mxCell id="aQFpdgkCh0J0lMaWyOth-6" value="dim_kunde" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=default;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;fontColor=default;fillColor=#E6E6E6;" parent="1" vertex="1">
-          <mxGeometry x="465" y="420" width="120" height="50" as="geometry" />
+          <mxGeometry x="320" y="350" width="120" height="50" as="geometry" />
         </mxCell>
         <mxCell id="aQFpdgkCh0J0lMaWyOth-7" value="dim_produkt" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;strokeColor=default;align=center;fontFamily=Helvetica;fontSize=12;fontColor=default;fillColor=#E6E6E6;" parent="1" vertex="1">
           <mxGeometry x="495" y="130" width="130" height="80" as="geometry" />
         </mxCell>
         <mxCell id="aQFpdgkCh0J0lMaWyOth-9" value="dim_vereinspartner" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=default;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;fontColor=default;fillColor=#E6E6E6;" parent="1" vertex="1">
-          <mxGeometry x="720" y="250" width="120" height="50" as="geometry" />
+          <mxGeometry x="490" y="430" width="120" height="50" as="geometry" />
         </mxCell>
         <mxCell id="aQFpdgkCh0J0lMaWyOth-10" value="Kategorie&lt;div&gt;hierarchie&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=default;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;fontColor=default;fillColor=#E6E6E6;" parent="1" vertex="1">
           <mxGeometry x="535" y="160" width="90" height="50" as="geometry" />
@@ -44,7 +44,7 @@
           <mxGeometry x="120" y="210" width="90" height="40" as="geometry" />
         </mxCell>
         <mxCell id="gmr3ghaiPxVmLR6RViPm-9" value="dim_lieferung" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=default;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;fontColor=default;fillColor=#E6E6E6;" parent="1" vertex="1">
-          <mxGeometry x="900" y="330" width="120" height="50" as="geometry" />
+          <mxGeometry x="720" y="250" width="120" height="50" as="geometry" />
         </mxCell>
         <mxCell id="87W1wj7zZc7dhrWSq31Q-1" value="umsatzplan_prod" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=default;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;fontColor=default;fillColor=#E6E6E6;shadow=0;glass=0;strokeWidth=2;fontStyle=1;" parent="1" vertex="1">
           <mxGeometry x="900" y="190" width="120" height="50" as="geometry" />

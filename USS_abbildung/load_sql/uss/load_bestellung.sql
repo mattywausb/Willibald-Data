@@ -39,7 +39,7 @@ INSERT INTO uss_willibald.bestellung_m
 (_KEY_BESTELLUNG_M, RABATTBETRAG, MITGLIEDSBONUS, GESAMTBETRAG, UMSATZSTEUER)
 select 
 	bestellungid
-	,rabatt
+	,rabattbetrag
 	,mitgliedsbonus
 	,GESAMTBETRAG
 	, UMSATZSTEUER

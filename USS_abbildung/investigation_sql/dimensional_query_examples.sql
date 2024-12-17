@@ -4,7 +4,7 @@ use schema dimensional_willibald;
 
 /* simples Beispiel */
 use schema dimensional_willibald;
-select BEZEICHNUNG , sum(MENGE) anzahl,sum(BETRAG_POSITION) umsatz,sum(BETRAG_POSITION_VERRECHNET) umsatz_verrechnet
+select BEZEICHNUNG , sum(MENGE) anzahl,sum(BETRAG_POSITION) umsatz
 from f_produktumsatz 
 	 join dim_PRODUKT   		using (_dk_produkt)
 group by 1
@@ -21,41 +21,42 @@ from f_produktumsatz f
 	 join dim_BESTELLUNG d_b  		using (_dk_bestellung)
 order by _dk_bestellung,posid
 
-/* + Werte aus der Bestellung */
+/* Werte auf Bestelltag summiert */
 use schema dimensional_willibald;
 select d_b.bestelldatum
 	  ,sum(f.BETRAG_POSITION) betrag_position_sum
 	  ,sum(d_b.MITGLIEDSBONUS) mitgliedsbonus_sum
       ,sum(d_b.RABATTBETRAG) rabattbetrag_sum
+      ,sum(d_b.GESAMTBETRAG) gesamtbetrag_sum
 	 from f_produktumsatz f
      join dim_BESTELLUNG d_b  		using (_dk_bestellung)
 group by 1 order by 1;
 
-/* Experimentierfeld 1 */
-select stage,b.bestelldatum ,v.vereinspartnerid ,pd.pflanztyp,
-	count(distinct _key_kunde) anzahl_kunden,
-	sum(p_m.menge) menge, sum(p_m.preis) preis, sum(b_m.gesamtbetrag) rechnungsbetrag
-from uss_willibald._bridge_willibald 
-left join uss_willibald.vereinspartner v using (_key_vereinspartner)
-left join uss_willibald.bestellung b using (_key_bestellung)
-left join uss_willibald.bestellung_m b_m using (_key_bestellung_m)
-left join uss_willibald.position_m p_m using (_key_position_m)
-left join uss_willibald.produkt pd using (_key_produkt)
---where stage='bestellung'
-where stage<>'lieferung'
-group by 1,2,3,4
-order by 2,3,4,1;
+/* Werte auf Bestelltag mit korrigierten positionen summiert */
+use schema dimensional_willibald;
+select d_b.bestelldatum
+	  ,sum(f.BETRAG_POSITION) betrag_position_sum
+	  ,sum(f.BETRAG_POSITION_VERRECHNET) betrag_position_verrechnet_sum
+	  ,sum(round(f.BETRAG_POSITION_VERRECHNET*1.19,2)) betrag_position_verrechnet_sum_brutto
+	 from f_produktumsatz f
+     join dim_BESTELLUNG d_b  		using (_dk_bestellung)
+group by 1 order by 1;
 
-/* Sum positionen und gesamtbetrag eines Kunden*/
-select br._key_kunde,
-from uss_willibald._bridge_willibald br
-left join uss_willibald.bestellung b_m using (_key_bestellung_m)
-left join uss_willibald.bestellung b_m using (_key_bestellung_m)
-where stage='bestellung'
-group by 1,2
-order by 1,2
-
-
+/* Werte auf Bestelltag mit voraggregat summiert */
+use schema dimensional_willibald;
+with bestellaggregat as (
+	select _dk_bestellung 
+		,sum(f.betrag_position) betrag_position_sum
+	from f_produktumsatz f
+	group by 1
+)
+select  d_b.bestelldatum
+	  ,sum(a.betrag_position_sum) betrag_position_sum
+	  ,sum(d_b.MITGLIEDSBONUS) mitgliedsbonus_sum
+      ,sum(d_b.RABATTBETRAG) rabattbetrag_sum
+      ,sum(d_b.GESAMTBETRAG) gesamtbetrag_sum from bestellaggregat a
+     join dim_BESTELLUNG d_b  		using (_dk_bestellung)
+group by 1 order by 1;
 
 /* summe umsatz, oberkategorie */
 select b.bestelldatum ,pd.oberkategorie ,ad_landing, sum(ps.preis)
