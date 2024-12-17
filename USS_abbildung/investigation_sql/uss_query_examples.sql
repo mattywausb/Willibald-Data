@@ -2,24 +2,24 @@
 
 /* simples Beispiel */
 use schema uss_willibald;
-select BEZEICHNUNG , sum(BETRAG_POSITION) umsatz, sum(MENGE) anzahl
+select BEZEICHNUNG , sum(MENGE) anzahl, sum(BETRAG_POSITION) umsatz
 	 from _BRIDGE_WILLIBALD 
 	 join PRODUKT   		using (_key_produkt)
---left join BESTELLUNG  		using (_key_bestellung)
-left join POSITION  		using (_key_position)
+left join POSITION_m  		using (_key_position_m)
 group by 1
 order by 1;
 
 /* Werte aus Position und  Bestellung */
 use schema uss_willibald;
 select bestellung.	BESTELLDATUM
-	  ,position.	BETRAG_POSITION 	
+	  ,position_m.	BETRAG_POSITION 	
 	  ,bestellung_m.MITGLIEDSBONUS 	
 	  ,bestellung_m.RABATTBETRAG 	
+	  ,bestellung_m.GESAMTBETRAG
 	 from _BRIDGE_WILLIBALD 
 	 join BESTELLUNG  		using (_key_bestellung)
 left join BESTELLUNG_M 		using (_key_bestellung_m)
-left join POSITION  		using (_key_position)
+left join POSITION_m  		using (_key_position_m)
 order by _key_bestellung,_key_position
 
 /* + Werte aus der Bestellung */

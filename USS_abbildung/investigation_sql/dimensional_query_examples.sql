@@ -4,33 +4,31 @@ use schema dimensional_willibald;
 
 /* simples Beispiel */
 use schema dimensional_willibald;
-select BEZEICHNUNG , sum(BETRAG_POSITION) umsatz, sum(MENGE) anzahl
+select BEZEICHNUNG , sum(MENGE) anzahl,sum(BETRAG_POSITION) umsatz,sum(BETRAG_POSITION_VERRECHNET) umsatz_verrechnet
 from f_produktumsatz 
 	 join dim_PRODUKT   		using (_dk_produkt)
---left join BESTELLUNG  		using (_key_bestellung)
 group by 1
 order by 1;
 
 /* Werte aus Position und  Bestellung */
 use schema dimensional_willibald;
-select BESTELLDATUM
-	  ,BETRAG_POSITION 	
-	  ,MITGLIEDSBONUS 	
-	  ,RABATTBETRAG 	
-from f_produktumsatz 
-	 join dim_BESTELLUNG  		using (_dk_bestellung)
-order by _dk_bestellung
+select f.verkaufstag 
+	  ,f.BETRAG_POSITION 	
+	  ,d_b.MITGLIEDSBONUS 	
+	  ,d_b.RABATTBETRAG 	
+	  ,d_b.gesamtbetrag 
+from f_produktumsatz f
+	 join dim_BESTELLUNG d_b  		using (_dk_bestellung)
+order by _dk_bestellung,posid
 
 /* + Werte aus der Bestellung */
-use schema uss_willibald;
-select bestellung.bestelldatum
-	  ,sum(BETRAG_POSITION) betrag_position_sum
-	  ,sum(MITGLIEDSBONUS) mitgliedsbonus_sum
-      ,sum(RABATTBETRAG) rabattbetrag_sum
-	 from _BRIDGE_WILLIBALD 
-     join BESTELLUNG  		using (_key_bestellung)
-left join BESTELLUNG_M 		using (_key_bestellung_m)
-left join POSITION  		using (_key_position)
+use schema dimensional_willibald;
+select d_b.bestelldatum
+	  ,sum(f.BETRAG_POSITION) betrag_position_sum
+	  ,sum(d_b.MITGLIEDSBONUS) mitgliedsbonus_sum
+      ,sum(d_b.RABATTBETRAG) rabattbetrag_sum
+	 from f_produktumsatz f
+     join dim_BESTELLUNG d_b  		using (_dk_bestellung)
 group by 1 order by 1;
 
 /* Experimentierfeld 1 */

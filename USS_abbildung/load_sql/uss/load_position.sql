@@ -26,14 +26,12 @@ insert into uss_willibald._bridge_willibald (stage,_key_position,_key_position_m
 truncate table uss_willibald.position;
 
 INSERT INTO uss_willibald.position
-( _key_position, posid, was_delivered,ad_landing,menge,betrag_position)
+( _key_position, posid, was_delivered,ad_landing)
 select 
 	 p.bestellungid||'-->'||p.posid 
 	,p.posid
 	,was_delivered
 	,ad_landing
-	,menge
-	,preis 
 from  willibald_xt.position p;
 
 /* 
@@ -44,7 +42,7 @@ from  willibald_xt.position p;
 truncate table uss_willibald.position_m;
 
 INSERT INTO uss_willibald.position_m
-( _key_position_m, menge, preis)
+( _key_position_m, menge, betrag_position)
 select 
 	bestellungid||'-->'||posid 
 	,menge
