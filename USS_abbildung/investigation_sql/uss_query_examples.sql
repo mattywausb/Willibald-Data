@@ -1,4 +1,13 @@
 
+/* Simples Beispies für Präsentation vereinfacht */
+select BEZEICHNUNG , sum(MENGE) anzahl, sum(BETRAG_POSITION) umsatz
+	 from _BRIDGE_WILLIBALD 
+	 join PRODUKT   		using (_key_produkt)
+left join POSITION  		using (_key_position)
+group by 1
+order by 1;
+
+
 
 /* simples Beispiel */
 use schema uss_willibald;
