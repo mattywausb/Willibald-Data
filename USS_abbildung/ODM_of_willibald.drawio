@@ -1,6 +1,6 @@
 <mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/25.0.2 Chrome/128.0.6613.186 Electron/32.2.5 Safari/537.36" version="25.0.2">
   <diagram name="Seite-1" id="UNef3Qii1UT9GNie3vts">
-    <mxGraphModel dx="1372" dy="884" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+    <mxGraphModel dx="1356" dy="868" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -64,6 +64,13 @@
         </mxCell>
         <mxCell id="aQFpdgkCh0J0lMaWyOth-4" value="Lieferung*&lt;div&gt;[Lieferkosten]&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=default;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;fontColor=default;fillColor=#E6E6E6;shadow=0;glass=0;strokeWidth=2;fontStyle=1;" parent="1" vertex="1">
           <mxGeometry x="40" y="340" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="iIo4aPsylHMAiEGyuamE-1" style="edgeStyle=none;shape=connector;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.75;entryDx=0;entryDy=0;strokeColor=default;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=11;fontColor=default;labelBackgroundColor=default;endArrow=open;endFill=0;" edge="1" parent="1" source="aQFpdgkCh0J0lMaWyOth-5" target="aQFpdgkCh0J0lMaWyOth-6">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="800" y="380" />
+            </Array>
+          </mxGeometry>
         </mxCell>
         <mxCell id="aQFpdgkCh0J0lMaWyOth-5" value="Lieferadresse" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=default;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;fontColor=default;fillColor=#E6E6E6;" parent="1" vertex="1">
           <mxGeometry x="640" y="420" width="120" height="60" as="geometry" />
@@ -247,14 +254,14 @@
         <mxCell id="ZqQWEdDKXTKqN2O3Py4e-1" value="" style="rounded=0;whiteSpace=wrap;html=1;opacity=70;strokeColor=none;" parent="1" vertex="1">
           <mxGeometry x="230" y="190" width="140" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="hvn_NoKTiON2fHTn2ww5-2" style="edgeStyle=none;shape=connector;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=default;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=11;fontColor=default;labelBackgroundColor=default;endArrow=open;endFill=0;" edge="1" parent="1" source="hvn_NoKTiON2fHTn2ww5-1" target="aQFpdgkCh0J0lMaWyOth-6">
+        <mxCell id="hvn_NoKTiON2fHTn2ww5-2" style="edgeStyle=none;shape=connector;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=default;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=11;fontColor=default;labelBackgroundColor=default;endArrow=open;endFill=0;" parent="1" source="hvn_NoKTiON2fHTn2ww5-1" target="aQFpdgkCh0J0lMaWyOth-6" edge="1">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
               <mxPoint x="800" y="310" />
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="hvn_NoKTiON2fHTn2ww5-1" value="Wohnort" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=default;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;fontColor=default;fillColor=#E6E6E6;" vertex="1" parent="1">
+        <mxCell id="hvn_NoKTiON2fHTn2ww5-1" value="Wohnort" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=default;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;fontColor=default;fillColor=#E6E6E6;" parent="1" vertex="1">
           <mxGeometry x="640" y="260" width="120" height="60" as="geometry" />
         </mxCell>
       </root>
