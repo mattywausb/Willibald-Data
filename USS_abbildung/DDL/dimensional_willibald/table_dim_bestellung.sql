@@ -13,3 +13,5 @@ CREATE TABLE dimensional_willibald.dim_bestellung (
 	gesamtbetrag numeric(16,2),
 	umsatzsteuer numeric(16,2)
 );
+
+alter table dimensional_willibald.dim_bestellung add constraint PK_dim_bestellung PRIMARY KEY(_dk_bestellung);

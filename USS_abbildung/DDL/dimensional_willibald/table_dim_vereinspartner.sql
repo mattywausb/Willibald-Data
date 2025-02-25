@@ -8,3 +8,5 @@ CREATE TABLE DIMENSIONAL_WILLIBALD.dim_vereinspartner (
 	RABATT2 NUMERIC(38,0),
 	RABATT3 NUMERIC(38,0)
 );
+
+alter table dimensional_willibald.dim_vereinspartner add constraint PK_dim_vereinspartner PRIMARY KEY(_dk_vereinspartner);

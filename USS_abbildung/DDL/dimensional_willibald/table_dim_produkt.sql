@@ -15,3 +15,5 @@ CREATE TABLE DIMENSIONAL_WILLIBALD.dim_produkt (
 	oberkategorie varchar(128),
 	werbebudget numeric(20)
 );
+
+alter table dimensional_willibald.dim_produkt add constraint PK_dim_produkt PRIMARY KEY(_dk_produkt);

@@ -9,3 +9,5 @@ CREATE TABLE DIMENSIONAL_WILLIBALD.dim_kunde (
 	geburtsjahr number(4) ,
 	kreditkartenfirma  varchar(128)
 );
+
+alter table dimensional_willibald.dim_kunde add constraint PK_dim_kunde PRIMARY KEY(_dk_kunde);

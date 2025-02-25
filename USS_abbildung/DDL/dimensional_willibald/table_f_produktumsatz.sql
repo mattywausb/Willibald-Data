@@ -16,3 +16,7 @@ CREATE TABLE dimensional_willibald.f_produktumsatz (
 	,verkaufstag date
 	,was_delivered boolean
 );
+alter table dimensional_willibald.dim_bestellung add constraint FK_bestellung FOREIGN KEY(_dk_bestellung) references dimensional_willibald.dim_bestellung(_dk_bestellung);
+alter table dimensional_willibald.dim_kunde add constraint FK_kunde FOREIGN KEY(_dk_kunde) references dimensional_willibald.dim_kunde(_dk_kunde);
+alter table dimensional_willibald.dim_vereinspartner add constraint FK_vereinspartner FOREIGN KEY(_dk_vereinspartner) references dimensional_willibald.dim_vereinspartner(_dk_vereinspartner);
+alter table dimensional_willibald.dim_produkt add constraint FK_produkt FOREIGN KEY(_dk_produkt) references dimensional_willibald.dim_produkt(_dk_produkt);
