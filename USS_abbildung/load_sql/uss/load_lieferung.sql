@@ -20,6 +20,7 @@ insert into uss_willibald._bridge_willibald (stage,_key_lieferung,_key_lieferung
 	left join willibald_xt.bestellung b on b.bestellungid =l.bestellungid
 	left join willibald_xt.position p on p.bestellungid =l.bestellungid and p.posid=l.posid
 	left join willibald_xt.kunde k on k.kundeid = b.kundeid 
+	where truncate(l.bestellungid/5)*5=l.bestellungid
 ;
 
 /* 
@@ -34,6 +35,7 @@ INSERT INTO uss_willibald.lieferung
 	l.bestellungid||'-->'||l.posid||'-->'||l.lieferadrid ||'-->'||l.lieferdienstid 
 	,l.lieferdatum 
 	from willibald_xt.lieferung l
+	where truncate(l.bestellungid/5)*5=l.bestellungid
 ;
 
 /* 
@@ -48,6 +50,7 @@ INSERT INTO uss_willibald.lieferung_m
 	l.bestellungid||'-->'||l.posid||'-->'||l.lieferadrid ||'-->'||l.lieferdienstid 
 	, lieferkosten -- Mocking some costs with no real context
 	from willibald_xt.lieferung l
+	where truncate(l.bestellungid/5)*5=l.bestellungid
 ;
 
 /* 

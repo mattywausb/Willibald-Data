@@ -41,7 +41,8 @@ select distinct
 								and lieferung_rank=1
 	join willibald_xt.bestellung b on b.bestellungid =p.bestellungid
 	left join willibald_xt.kunde k on k.kundeid = b.kundeid 
-	left join willibald_xt.produkt pd on pd.produktid = p.produktid ;
+	left join willibald_xt.produkt pd on pd.produktid = p.produktid 
+    where truncate(p.bestellungid/5)*5=p.bestellungid;
 
 /*
   select * from dvf_uss_demo.dimensional_willibald.f_produktumsatz;

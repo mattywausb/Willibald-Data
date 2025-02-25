@@ -1,5 +1,5 @@
 
-truncate table DIMENSIONAL_WILLIBALD.bestellung;
+truncate table DIMENSIONAL_WILLIBALD.DIM_BESTELLUNG;
 
 INSERT INTO DIMENSIONAL_WILLIBALD.DIM_BESTELLUNG
 ( _DK_BESTELLUNG
@@ -21,7 +21,8 @@ select
 , MITGLIEDSBONUS
 , GESAMTBETRAG
 , UMSATZSTEUER
-from  willibald_xt.bestellung;
+from  willibald_xt.bestellung
+where truncate(bestellungid/5)*5=bestellungid;
 
 /* 
  * select * from 	 DIMENSIONAL_WILLIBALD.dim_bestellung

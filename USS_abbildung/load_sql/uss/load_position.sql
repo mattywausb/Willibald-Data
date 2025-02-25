@@ -17,7 +17,8 @@ insert into uss_willibald._bridge_willibald (stage,_key_position,_key_position_m
 	from willibald_xt.position p 
 	join willibald_xt.bestellung b on b.bestellungid =p.bestellungid
 	left join willibald_xt.kunde k on k.kundeid = b.kundeid 
-	left join willibald_xt.produkt pd on pd.produktid = p.produktid ;
+	left join willibald_xt.produkt pd on pd.produktid = p.produktid 
+	where truncate(p.bestellungid/5)*5=p.bestellungid;
 
 /* 
  * select * from 	 uss_willibald._bridge_willibald where stage='position'
@@ -32,7 +33,8 @@ select
 	,p.posid
 	,was_delivered
 	,ad_landing
-from  willibald_xt.position p;
+from  willibald_xt.position p
+where truncate(p.bestellungid/5)*5=p.bestellungid;
 
 /* 
  * select * from 	 uss_willibald.position
@@ -47,7 +49,8 @@ select
 	bestellungid||'-->'||posid 
 	,menge
 	,preis 
-from  willibald_xt.position;
+from  willibald_xt.position
+where truncate(bestellungid/5)*5=bestellungid;
 
 /* 
  * select * from 	 uss_willibald.position_m

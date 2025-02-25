@@ -12,7 +12,8 @@ insert into uss_willibald._bridge_willibald (stage,_key_bestellung,_key_bestellu
 		, b.allglieferadrid
 		, k.vereinspartnerid 
 	from willibald_xt.bestellung b
-	left join willibald_xt.kunde k on k.kundeid = b.kundeid ;
+	left join willibald_xt.kunde k on k.kundeid = b.kundeid 
+	where truncate(bestellungid/5)*5=bestellungid;
 
 /* 
  * select * from 	 uss_willibald._bridge_willibald where stage='bestellung'
@@ -27,7 +28,8 @@ select
 	bestellungid ,
 	bestelldatum ,
 	wunschdatum ,
-from  willibald_xt.bestellung;
+from  willibald_xt.bestellung
+where truncate(bestellungid/5)*5=bestellungid;
 
 /* 
  * select * from 	 uss_willibald.bestellung
@@ -44,4 +46,5 @@ select
 	,GESAMTBETRAG
 	, UMSATZSTEUER
 from willibald_xt.bestellung
+where truncate(bestellungid/5)*5=bestellungid
 ;
