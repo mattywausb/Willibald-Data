@@ -22,7 +22,8 @@ select
 , GESAMTBETRAG
 , UMSATZSTEUER
 from  willibald_xt.bestellung
-where truncate(bestellungid/5)*5=bestellungid;
+	where bestellungid in (Select bestellungid from willibald_xt.data_sample_bestellung);
+
 
 /* 
  * select * from 	 DIMENSIONAL_WILLIBALD.dim_bestellung

@@ -42,7 +42,7 @@ select distinct
 	join willibald_xt.bestellung b on b.bestellungid =p.bestellungid
 	left join willibald_xt.kunde k on k.kundeid = b.kundeid 
 	left join willibald_xt.produkt pd on pd.produktid = p.produktid 
-    where truncate(p.bestellungid/5)*5=p.bestellungid;
+	where p.bestellungid in (Select bestellungid from willibald_xt.data_sample_bestellung);
 
 /*
   select * from dvf_uss_demo.dimensional_willibald.f_produktumsatz;

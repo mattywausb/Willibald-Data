@@ -1,3 +1,19 @@
+/* Abdeckung und Anzahl je Tag */
+
+select bestelldatum ,count(1)
+from willibald_shop_p1.bestellung 
+group by 1 order by 1;
+
+with ranked_bestellung as (
+select bestellungid, rank() over (partition by bestelldatum order by bestellungid) sample_rank
+from willibald_shop_p1.bestellung
+)
+select bestellungid
+from ranked_bestellung 
+where sample_rank<=15
+
+order by 2,1
+
 
 /* Abdeckung Kunden durch Bestellungen und umgekehrt */
 select 
