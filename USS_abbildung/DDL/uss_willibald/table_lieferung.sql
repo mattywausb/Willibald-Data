@@ -7,4 +7,4 @@ CREATE TABLE uss_willibald.Lieferung (
     LieferDatum date  NOT NULL
 );
 
-
+alter table uss_willibald.Lieferung add constraint PK_Lieferung PRIMARY KEY(_key_Lieferung);

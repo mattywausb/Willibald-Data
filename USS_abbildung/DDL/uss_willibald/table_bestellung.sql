@@ -9,3 +9,6 @@ CREATE TABLE uss_willibald.bestellung (
 	wunschdatum date NOT NULL,
 	rabatt numeric(5,2)
 );
+
+alter table uss_willibald.bestellung add constraint PK_bestellung PRIMARY KEY(_key_bestellung);
+--alter table uss_willibald.xxx add constraint PK_xxx PRIMARY KEY(_key_xxx);

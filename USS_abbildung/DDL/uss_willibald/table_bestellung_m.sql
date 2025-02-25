@@ -10,3 +10,6 @@ CREATE TABLE uss_willibald.bestellung_m (
 	gesamtbetrag numeric(16,2),
 	umsatzsteuer numeric(16,2)
 );
+
+alter table uss_willibald.bestellung_m add constraint PK_bestellung PRIMARY KEY(_key_bestellung_m);
+--alter table uss_willibald.xxx_m add constraint PK_xxx PRIMARY KEY(_key_xxx_m);

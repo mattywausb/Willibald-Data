@@ -8,3 +8,5 @@ CREATE TABLE uss_willibald.umsatzplan_prodkat (
 	monat numeric (2),
 	geplanter_kategorie_umsatz numeric(5,0)
 );
+
+alter table uss_willibald.umsatzplan_prodkat add constraint PK_umsatzplan_prodkat PRIMARY KEY(_key_umsatzplan_prodkat);

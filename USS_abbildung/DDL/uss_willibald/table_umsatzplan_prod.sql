@@ -7,3 +7,5 @@ CREATE TABLE uss_willibald.umsatzplan_prod (
 	quartal numeric(1),
 	GEPLANTER_PRODUKT_UMSATZ numeric(5,0)
 );
+
+alter table uss_willibald.umsatzplan_prod add constraint PK_umsatzplan_prod PRIMARY KEY(_key_umsatzplan_prod);

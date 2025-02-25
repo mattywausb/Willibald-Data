@@ -14,3 +14,5 @@ CREATE TABLE uss_willibald.produkt (
 	Zehrgruppe varchar(128),
 	oberkategorie varchar(128)
 );
+
+alter table uss_willibald.produkt add constraint PK_produkt PRIMARY KEY(_key_produkt);

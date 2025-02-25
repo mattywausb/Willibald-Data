@@ -7,3 +7,5 @@ CREATE TABLE uss_willibald.position_m (
 	menge numeric(10),
 	betrag_position numeric(10,2)
 );
+
+alter table uss_willibald.position_m add constraint PK_position_m PRIMARY KEY(_key_position_m);

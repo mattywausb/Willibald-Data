@@ -9,3 +9,5 @@ CREATE TABLE uss_willibald.kunde (
 	geburtsjahr number(4) ,
 	kreditkartenfirma  varchar(128)
 );
+
+alter table uss_willibald.kunde add constraint PK_kunde PRIMARY KEY(_key_kunde);

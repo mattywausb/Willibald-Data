@@ -8,3 +8,5 @@ CREATE TABLE uss_willibald.vereinspartner (
 	RABATT2 NUMERIC(38,0),
 	RABATT3 NUMERIC(38,0)
 );
+
+alter table uss_willibald.vereinspartner add constraint PK_vereinspartner PRIMARY KEY(_key_vereinspartner);

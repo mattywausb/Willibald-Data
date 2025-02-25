@@ -8,3 +8,5 @@ CREATE TABLE uss_willibald.position (
 	,was_delivered boolean
 	,ad_landing boolean
 );
+
+alter table uss_willibald.position add constraint PK_position PRIMARY KEY(_key_position);

@@ -7,4 +7,6 @@ CREATE TABLE uss_willibald.Lieferung_m (
     Lieferkosten numeric(20,2)
 );
 
+alter table uss_willibald.Lieferung_m add constraint PK_Lieferung_m PRIMARY KEY(_key_Lieferung_m);
+
 
