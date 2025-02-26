@@ -6,9 +6,9 @@ use schema dimensional_willibald;
 use schema dimensional_willibald;
 select BEZEICHNUNG , sum(MENGE) anzahl,sum(BETRAG_POSITION) umsatz
 from f_produktumsatz 
-	 join dim_PRODUKT   		using (_dk_produkt)
-group by 1
-order by 1;
+	 left join dim_PRODUKT   		using (_dk_produkt)
+group by _dk_produkt,1
+order by 1 nulls first ;
 
 /* Werte aus Position und  Bestellung */
 use schema dimensional_willibald;
@@ -18,8 +18,8 @@ select f.verkaufstag
 	  ,d_b.RABATTBETRAG 	
 	  ,d_b.gesamtbetrag 
 from f_produktumsatz f
-	 join dim_BESTELLUNG d_b  		using (_dk_bestellung)
-order by _dk_bestellung,posid
+	right join dim_BESTELLUNG d_b  		using (_dk_bestellung)
+order by _dk_bestellung ,posid 
 
 /* Werte auf Bestelltag summiert */
 use schema dimensional_willibald;

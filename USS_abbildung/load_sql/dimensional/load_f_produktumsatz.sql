@@ -16,13 +16,14 @@ insert into dvf_uss_demo.dimensional_willibald.f_produktumsatz
 , menge
 , verkaufstag
 , was_delivered)
+
 with liefer_ranking as (
 	Select bestellungid ,posid ,lieferdienstid 
 	,rank() over (partition by bestellungid,posid order by lieferdatum desc,lieferdienstid desc) lieferung_rank
 	from willibald_xt.lieferung 
 )
 select distinct 
-		 p.bestellungid 
+		 b.bestellungid 
 		, b.kundeid 
 		,lr.lieferdienstid
 		, p.produktid
@@ -35,14 +36,14 @@ select distinct
 		, menge
 		, b.bestelldatum verkaufstag
 		, was_delivered		
-	from willibald_xt."POSITION" p 
+	from willibald_xt.bestellung b  
+	left join willibald_xt."POSITION" p on p.bestellungid =b.bestellungid
 	left join liefer_ranking lr on lr.bestellungid = p.bestellungid
 								and lr.posid= p.posid
 								and lieferung_rank=1
-	join willibald_xt.bestellung b on b.bestellungid =p.bestellungid
 	left join willibald_xt.kunde k on k.kundeid = b.kundeid 
 	left join willibald_xt.produkt pd on pd.produktid = p.produktid 
-	where p.bestellungid in (Select bestellungid from willibald_xt.data_sample_bestellung);
+	where b.bestellungid in (Select bestellungid from willibald_xt.data_sample_bestellung);
 
 /*
   select * from dvf_uss_demo.dimensional_willibald.f_produktumsatz;

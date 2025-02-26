@@ -16,7 +16,7 @@ select
 		then v.rabatt1 /2.0 
 		else 0 end 			  as MITGLIEDSBONUS  -- artifical generation of "noise"
 from  willibald_shop_p1.bestellung b
-join positionssumme ps on ps.bestellungid = b.bestellungid 
+left join positionssumme ps on ps.bestellungid = b.bestellungid 
 left join willibald_shop_p1.vereinspartner v on v.kundeidverein =b.kundeid 
 )
 select 
@@ -30,4 +30,5 @@ from willibald_shop_p1.bestellung b
 join rabatt_und_bonus rb on rb.bestellungid= b.bestellungid 
 ;
 
+-- select * from willibald_xt.bestellung order by bestellungid;
 

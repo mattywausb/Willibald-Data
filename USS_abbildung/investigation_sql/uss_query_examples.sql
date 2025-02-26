@@ -13,10 +13,10 @@ order by 1;
 use schema uss_willibald;
 select BEZEICHNUNG , sum(MENGE) anzahl, sum(BETRAG_POSITION) umsatz
 	 from _BRIDGE_WILLIBALD 
-	 join PRODUKT   		using (_key_produkt)
+left join PRODUKT   		using (_key_produkt)
 left join POSITION_m  		using (_key_position_m)
 group by 1
-order by 1;
+order by 1 NULLS first;
 
 /* Werte aus Position und  Bestellung */
 use schema uss_willibald;
@@ -45,11 +45,12 @@ left join POSITION_M  		using (_key_position_m)
 group by 1 order by 1;
 
 
-/* summe umsatz, oberkategorie */
-select b.bestelldatum ,pd.oberkategorie ,ad_landing, sum(ps.preis)
+/* summe umsatz, oberkategorie, Ad landing or not */
+select b.bestelldatum ,pd.oberkategorie ,ad_landing, sum(ps.betrag_position)
 from uss_willibald._bridge_willibald 
 join uss_willibald.bestellung b using (_key_bestellung)
 join uss_willibald.produkt pd  using (_key_produkt)
+join uss_willibald.POSITION p using (_key_position)
 join uss_willibald.POSITION_m ps using (_key_position_m)
 group by 1,2,3
 order by 1,2,3
@@ -75,7 +76,7 @@ select
 	,coalesce(upk.jahr,year(b.bestelldatum)) jahr
 	,coalesce(upk.monat ,month(b.bestelldatum)) monat
 	,sum(upk.geplanter_kategorie_umsatz) geplanter_kategorie_umsatz
-	,sum(ps_m.preis) umsatz
+	,sum(ps_m.betrag_position) umsatz
  from uss_willibald._bridge_willibald 
 left join uss_willibald.bestellung b using (_key_bestellung)
 left join uss_willibald.position_m ps_m using (_key_position_m)
