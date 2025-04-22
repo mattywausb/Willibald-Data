@@ -1,19 +1,21 @@
-﻿-- Exported from QuickDBD: https://www.quickdatabasediagrams.com/
+-- Exported from QuickDBD: https://www.quickdatabasediagrams.com/
 -- NOTE! If you have used non-SQL datatypes in your design, you will have to change these here.
 
 
- create schema willibald_roadshow_tag1;
-CREATE TABLE willibald_roadshow_tag1.RS_Bestellung (
-    BestellungID varchar(128)  NOT NULL ,
-    KundeID char(13)  NULL ,
-    VereinsPartnerID varchar(30)  NOT NULL ,
-    Kaufdatum date  NOT NULL ,
-    Kreditkarte varchar(30)  NULL ,
-    GueltigBis char(5)  NULL ,
-    KKFirma varchar(128)  NULL ,
-    ProduktID int  NOT NULL ,
-    Menge int  NOT NULL ,
-    Preis numeric(10,2)  NOT NULL ,
-    Rabatt numeric(5,2)  NULL
-)
+-- CREATE SCHEMA WILLIBALD_ROADSHOW_T1;
 
+-- SET DEFAULT SCHEMA WILLIBALD_ROADSHOW_T1;
+
+CREATE TABLE RS_Bestellung (
+    BestellungID VARCHAR(128) NOT NULL,
+    KundeID CHAR(13) NULL,
+    VereinsPartnerID VARCHAR(30) NOT NULL,
+    Kaufdatum DATE NOT NULL,
+    Kreditkarte VARCHAR(30) NULL,
+    GueltigBis CHAR(6) NULL,
+    KKFirma VARCHAR(128) NULL,
+    ProduktID NUMERIC(10,0)NOT NULL,
+    Menge NUMERIC(10,0)NOT NULL,
+    Preis NUMERIC(10,2) NOT NULL,
+    Rabatt NUMERIC(5,2) NULL
+);
