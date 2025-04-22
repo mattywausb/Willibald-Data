@@ -5,6 +5,9 @@ Webshop/.DS_Store
 .DS_Store
 .project
 .dbeaver/
+=======
+.dbeaver/
+.project
 .vs/
 Scripts/
 *.bkp

@@ -1,0 +1,12 @@
+{
+    "schemas": [
+        "WILLIBALD_WEBSHOP",
+        "WILLIBALD_WEBSHOP_P1",
+        "WILLIBALD_WEBSHOP_P2",
+        "WILLIBALD_WEBSHOP_P3",
+        "WILLIBALD_ROADSHOW",
+        "WILLIBALD_ROADSHOW_T1",
+        "WILLIBALD_ROADSHOW_T2",
+        "WILLIBALD_ROADSHOW_T3"
+    ]
+}

@@ -1,0 +1,162 @@
+Erstelle mir ein Python Skript, welches
+
+folgende Schemata in Postgresql löscht und dann erstellt:
+
+WILLIBALD_WEBSHOP
+WILLIBALD_WEBSHOP_P1
+WILLIBALD_WEBSHOP_P2
+WILLIBALD_WEBSHOP_P3
+WILLIBALD_ROADSHOW
+WILLIBALD_ROADSHOW_T1
+WILLIBALD_ROADSHOW_T2
+WILLIBALD_ROADSHOW_T3
+
+Anschließend werden die folgenden SQL Skripte zur Erstellung von Tabellen für das Schema WILLIBALD_WEBSHOP_P1 ausgeführt
+
+/Willibald-Data/Webshop/Testdaten Periode 1/_Testdaten_DDL_1_ANSI.sql und
+/Willibald-Data/Webshop/Testdaten Periode 1/Dubletten_ANSI.sql
+
+und folgende  CSV-Dateien in die erstellten Tabellen geladen:
+
+/Willibald-Data/Webshop/Testdaten Periode 1/bestellung.csv
+/Willibald-Data/Webshop/Testdaten Periode 1/href_termintreue.csv
+/Willibald-Data/Webshop/Testdaten Periode 1/kunde.csv
+/Willibald-Data/Webshop/Testdaten Periode 1/lieferadresse.csv
+/Willibald-Data/Webshop/Testdaten Periode 1/lieferdienst.csv
+/Willibald-Data/Webshop/Testdaten Periode 1/Lieferung.csv
+/Willibald-Data/Webshop/Testdaten Periode 1/postition.csv
+/Willibald-Data/Webshop/Testdaten Periode 1/produkt.csv
+/Willibald-Data/Webshop/Testdaten Periode 1/produktkategorie
+/Willibald-Data/Webshop/Testdaten Periode 1/ref_produkt_typ.csv
+/Willibald-Data/Webshop/Testdaten Periode 1/vereinspartner.csv
+/Willibald-Data/Webshop/Testdaten Periode 1/wohnort.csv
+
+Desweiteren werden die folgenden SQL Skripte zur Erstellung von Tabellen für das Schema WILLIBALD_WEBSHOP_P2 ausgeführt
+
+/Willibald-Data/Webshop/Testdaten Periode 2/_Testdaten_DDL_P2_ANSI.sql und
+
+und folgende  CSV-Dateien in die erstellten Tabellen geladen:
+
+/willibald-data/Webshop/Testdaten Periode 2/bestellung.csv
+/willibald-data/Webshop/Testdaten Periode 2/href_termintreue.csv
+/willibald-data/Webshop/Testdaten Periode 2/kunde.csv
+/willibald-data/Webshop/Testdaten Periode 2/lieferadresse.csv
+/willibald-data/Webshop/Testdaten Periode 2/lieferdienst.csv
+/willibald-data/Webshop/Testdaten Periode 2/Lieferung.csv
+/willibald-data/Webshop/Testdaten Periode 2/postition.csv
+/willibald-data/Webshop/Testdaten Periode 2/produkt.csv
+/willibald-data/Webshop/Testdaten Periode 2/produktkategorie.csv
+/willibald-data/Webshop/Testdaten Periode 2/vereinspartner.csv
+/willibald-data/Webshop/Testdaten Periode 2/wohnort.csv'
+
+
+Desweiteren werden die folgenden SQL Skripte zur Erstellung von Tabellen für das Schema WILLIBALD_WEBSHOP_P3 ausgeführt
+
+/Willibald-Data/Webshop/Testdaten Periode 3/_Testdaten_DDL_P3_ANSI.sql und
+
+und folgende  CSV-Dateien in die erstellten Tabellen geladen:
+
+/willibald-data/Webshop/Testdaten Periode 3/bestellung.csv
+/willibald-data/Webshop/Testdaten Periode 3/kunde.csv
+/willibald-data/Webshop/Testdaten Periode 3/lieferadresse.csv
+/willibald-data/Webshop/Testdaten Periode 3/lieferdienst.csv
+/willibald-data/Webshop/Testdaten Periode 3/Lieferung.csv
+/willibald-data/Webshop/Testdaten Periode 3/postition.csv
+/willibald-data/Webshop/Testdaten Periode 3/produkt.csv
+/willibald-data/Webshop/Testdaten Periode 3/produktkategorie.csv
+/willibald-data/Webshop/Testdaten Periode 3/vereinspartner.csv
+/willibald-data/Webshop/Testdaten Periode 3/wohnort.csv'
+
+
+
+
+Desweiteren werden die folgenden SQL Skripte zur Erstellung von Tabellen für das Schema WILLIBALD_ROADSHOW_T1 ausgeführt
+
+/willibald-data/Roadshow/Tag 1/_Roadshow_DDL_ANSI.sql,
+/willibald-data/Roadshow/Tag 1/_Roadshow_DDL_1_ANSI.sql
+
+und folgende  CSV-Dateien in die erstellten Tabellen geladen:
+
+/willibald-data/Roadshow/Tag 1/RS_Bestellung.csv
+
+
+
+Desweiteren werden die folgenden SQL Skripte zur Erstellung von Tabellen für das Schema WILLIBALD_ROADSHOW_T2 ausgeführt
+
+/willibald-data/Roadshow/Tag 2/_Roadshow_DDL_ANSI.sql,
+
+und folgende  CSV-Dateien in die erstellten Tabellen geladen:
+
+/willibald-data/Roadshow/Tag 2/RS_Bestellung.csv
+
+
+Desweiteren werden die folgenden SQL Skripte zur Erstellung von Tabellen für das Schema WILLIBALD_ROADSHOW_T3 ausgeführt
+
+/willibald-data/Roadshow/Tag 3/_Roadshow_DDL_ANSI.sql,
+
+und folgende  CSV-Dateien in die erstellten Tabellen geladen:
+
+/willibald-data/Roadshow/Tag 3/RS_Bestellung.csv
+
+
+und erstelle mir im Schema  WILLIBALD_WEBSHOP Views, die  1:1  die Tabellen im Schema WILLIBALD_WEBSHOP_P1 selektieren 
+und erstelle mir im Schema  WILLIBALD_ROADSHOW Views, die  1:1  die Tabellen im Schema WILLIBALD_ROADSHOW_T1 selektieren
+
+
+
+Python Skript Abarbeitungsreihenfolge
+
+Das Skript wird in der folgenden Reihenfolge ausgeführt:
+
+1.	Verbindung zu Snowflake herstellen:
+
+Das Skript stellt eine Verbindung zu Snowflake her, indem es die Verbindungsinformationen verwendet.
+2.	Schemata erstellen:
+
+Das Skript erstellt die angegebenen Schemata (WILLIBALD_WEBSHOP, WILLIBALD_WEBSHOP_P1, WILLIBALD_WEBSHOP_P2, WILLIBALD_WEBSHOP_P3, WILLIBALD_ROADSHOW, WILLIBALD_ROADSHOW_T1, WILLIBALD_ROADSHOW_T2, WILLIBALD_ROADSHOW_T3).
+3.	SQL-Skripte für WILLIBALD_WEBSHOP_P1 ausführen:
+
+Das Skript führt die SQL-Skripte aus, um die Tabellen im Schema WILLIBALD_WEBSHOP_P1 zu erstellen.
+4.	CSV-Dateien in WILLIBALD_WEBSHOP_P1 laden:
+
+Das Skript lädt die CSV-Dateien in die erstellten Tabellen im Schema WILLIBALD_WEBSHOP_P1.
+5.	SQL-Skripte für WILLIBALD_WEBSHOP_P2 ausführen:
+
+Das Skript führt die SQL-Skripte aus, um die Tabellen im Schema WILLIBALD_WEBSHOP_P2 zu erstellen.
+6.	CSV-Dateien in WILLIBALD_WEBSHOP_P2 laden:
+
+Das Skript lädt die CSV-Dateien in die erstellten Tabellen im Schema WILLIBALD_WEBSHOP_P2.
+7.	SQL-Skripte für WILLIBALD_WEBSHOP_P3 ausführen:
+
+Das Skript führt die SQL-Skripte aus, um die Tabellen im Schema WILLIBALD_WEBSHOP_P3 zu erstellen.
+8.	CSV-Dateien in WILLIBALD_WEBSHOP_P3 laden:
+
+Das Skript lädt die CSV-Dateien in die erstellten Tabellen im Schema WILLIBALD_WEBSHOP_P3.
+9.	SQL-Skripte für WILLIBALD_ROADSHOW_T1 ausführen:
+
+Das Skript führt die SQL-Skripte aus, um die Tabellen im Schema WILLIBALD_ROADSHOW_T1 zu erstellen.
+10.	CSV-Dateien in WILLIBALD_ROADSHOW_T1 laden:
+
+Das Skript lädt die CSV-Dateien in die erstellten Tabellen im Schema WILLIBALD_ROADSHOW_T1.
+11.	SQL-Skripte für WILLIBALD_ROADSHOW_T2 ausführen:
+
+Das Skript führt die SQL-Skripte aus, um die Tabellen im Schema WILLIBALD_ROADSHOW_T2 zu erstellen.
+12.	CSV-Dateien in WILLIBALD_ROADSHOW_T2 laden:
+
+Das Skript lädt die CSV-Dateien in die erstellten Tabellen im Schema WILLIBALD_ROADSHOW_T2.
+13.	SQL-Skripte für WILLIBALD_ROADSHOW_T3 ausführen:
+
+Das Skript führt die SQL-Skripte aus, um die Tabellen im Schema WILLIBALD_ROADSHOW_T3 zu erstellen.
+14.	CSV-Dateien in WILLIBALD_ROADSHOW_T3 laden:
+
+Das Skript lädt die CSV-Dateien in die erstellten Tabellen im Schema WILLIBALD_ROADSHOW_T3.
+15.	Views im Schema WILLIBALD_WEBSHOP erstellen:
+
+Das Skript erstellt Views im Schema WILLIBALD_WEBSHOP, die die Tabellen im Schema WILLIBALD_WEBSHOP_P1 selektieren.
+16.	Views im Schema WILLIBALD_ROADSHOW erstellen:
+
+Das Skript erstellt Views im Schema WILLIBALD_ROADSHOW, die die Tabellen im Schema WILLIBALD_ROADSHOW_T1 selektieren.
+17.	Verbindung schließen:
+
+Das Skript schließt die Verbindung zu Snowflake.
+
