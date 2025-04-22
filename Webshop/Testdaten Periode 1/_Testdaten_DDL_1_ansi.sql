@@ -1,103 +1,114 @@
-﻿create schema willibald_shop_p1;
+-- Exported from QuickDBD: https://www.quickdatabasediagrams.com/
+-- NOTE! If you have used non-SQL datatypes in your design, you will have to change these here.
 
-CREATE TABLE willibald_shop_p1.Kunde (
-    KundeID char(13)  NOT NULL ,
-    VereinsPartnerID varchar(30)  NULL ,
-    Vorname varchar(128)  NOT NULL ,
-    Name varchar(128)  NOT NULL ,
-    Geschlecht char  NULL ,
-    Geburtsdatum date  NOT NULL ,
-    Telefon varchar(20)  NULL ,
-    Mobil varchar(20)  NULL ,
-    Email varchar(128)  NULL ,
-    Kreditkarte varchar(30)  NOT NULL ,
-    GueltigBis char(5)  NOT NULL ,
-    KKFirma varchar(128)  NOT NULL
+--SET XACT_ABORT ON;
+
+--BEGIN TRANSACTION QUICKDBD;
+
+--create schema willibald_webshop_p1;
+
+--set default schema willibald_webshop_p1;
+
+CREATE TABLE Kunde (
+    KundeID CHAR(13) NOT NULL,
+    VereinsPartnerID VARCHAR(30) NULL,
+    Vorname VARCHAR(128) NOT NULL,
+    Name VARCHAR(128) NOT NULL,
+    Geschlecht CHAR NULL,
+    Geburtsdatum DATE NOT NULL,
+    Telefon VARCHAR(20) NULL,
+    Mobil VARCHAR(20) NULL,
+    Email VARCHAR(128) NULL,
+    Kreditkarte VARCHAR(30) NOT NULL,
+    GueltigBis CHAR(5) NOT NULL,
+    KKFirma VARCHAR(128) NOT NULL
 );
 
-CREATE TABLE willibald_shop_p1.Wohnort (
-    KundeID char(13)  NOT NULL ,
-    Von date  NOT NULL ,
-    Bis date  NULL ,
-    Strasse varchar(128)  NOT NULL ,
-    Hausnummer varchar(10)  NOT NULL ,
-    Adresszusatz varchar(128)  NULL ,
-    Plz varchar(10)  NOT NULL ,
-    Ort varchar(128)  NOT NULL ,
-    Land varchar(128)  NULL
+CREATE TABLE Wohnort (
+    KundeID CHAR(13) NOT NULL,
+    Von DATE NOT NULL,
+    Bis DATE NULL,
+    Strasse VARCHAR(128) NOT NULL,
+    Hausnummer VARCHAR(10) NULL,
+    Adresszusatz VARCHAR(128) NULL,
+    Plz VARCHAR(10) NOT NULL,
+    Ort VARCHAR(128) NOT NULL,
+    Land VARCHAR(128) NULL
 );
 
-CREATE TABLE willibald_shop_p1.Lieferadresse (
-    LieferAdrID int  NOT NULL ,
-    KundeID char(13)  NOT NULL ,
-    Strasse varchar(128)  NOT NULL ,
-    Hausnummer varchar(10)  NOT NULL ,
-    Adresszusatz varchar(128)  NULL ,
-    Plz varchar(10)  NOT NULL ,
-    Ort varchar(128)  NOT NULL ,
-    Land varchar(128)  NULL
+CREATE TABLE Lieferadresse (
+    LieferAdrID NUMERIC(10,0)NOT NULL,
+    KundeID CHAR(13) NOT NULL,
+    Strasse VARCHAR(128) NOT NULL,
+    Hausnummer VARCHAR(10) NOT NULL,
+    Adresszusatz VARCHAR(128) NULL,
+    Plz VARCHAR(10) NOT NULL,
+    Ort VARCHAR(128) NOT NULL,
+    Land VARCHAR(128) NULL
 );
 
-CREATE TABLE willibald_shop_p1.VereinsPartner (
-    VereinsPartnerID varchar(30)  NOT NULL ,
-    KundeIDVerein char(13)  NOT NULL ,
-    Rabatt1 int  NOT NULL ,
-    Rabatt2 int  NOT NULL ,
-    Rabatt3 int  NOT NULL
+CREATE TABLE VereinsPartner (
+    VereinsPartnerID VARCHAR(30) NOT NULL,
+    KundeIDVerein CHAR(13) NOT NULL,
+    Rabatt1 NUMERIC(10,0)NOT NULL,
+    Rabatt2 NUMERIC(10,0)NOT NULL,
+    Rabatt3 NUMERIC(10,0)NOT NULL
 );
 
-CREATE TABLE willibald_shop_p1.Kategorie (
-    KatID varchar(50)  NOT NULL ,
-    OberKatID varchar(50)  NULL ,
-    Name varchar(512)  NOT NULL
+CREATE TABLE Kategorie (
+    KatID VARCHAR(50) NOT NULL,
+    OberKatID VARCHAR(50) NULL,
+    Name VARCHAR(512) NOT NULL
 );
 
-CREATE TABLE willibald_shop_p1.Produkt (
-    ProduktID int  NOT NULL ,
-    KatID varchar(50)  NOT NULL ,
-    Bezeichnung varchar(512)  NOT NULL ,
-    Umfang varchar(128)  NOT NULL ,
-    Typ int  NOT NULL ,
-    Preis decimal(5,2)  NOT NULL ,
-    Pflanzort varchar(128)  NOT NULL ,
-    Pflanzabstand varchar(128)  NOT NULL
+CREATE TABLE Produkt (
+    ProduktID NUMERIC(10,0)NOT NULL,
+    KatID VARCHAR(50) NOT NULL,
+    Bezeichnung VARCHAR(512) NOT NULL,
+    Umfang VARCHAR(128) NOT NULL,
+    Typ NUMERIC(10,0)NOT NULL,
+    Preis DECIMAL(5,2) NOT NULL,
+    Pflanzort VARCHAR(128) NOT NULL,
+    Pflanzabstand VARCHAR(128) NOT NULL
 );
 
-CREATE TABLE willibald_shop_p1.Bestellung (
-    BestellungID bigint  NOT NULL ,
-    KundeID char(13)  NOT NULL ,
-    AllgLieferAdrID int  NOT NULL ,
-    Bestelldatum date  NOT NULL ,
-    Wunschdatum date  NOT NULL ,
-    Rabatt numeric(5,2)  NOT NULL
+CREATE TABLE Bestellung (
+    BestellungID NUMERIC(19,0)NOT NULL,
+    KundeID CHAR(13) NOT NULL,
+    AllgLieferAdrID NUMERIC(10,0)NOT NULL,
+    Bestelldatum DATE NOT NULL,
+    Wunschdatum DATE NOT NULL,
+    Rabatt NUMERIC(5,2) NOT NULL
 );
 
-CREATE TABLE willibald_shop_p1.Position (
-    BestellungID bigint  NOT NULL ,
-    PosID bigint  NOT NULL ,
-    ProduktID int  NOT NULL ,
-    SpezLieferAdrID int  NULL ,
-    Menge int  NOT NULL ,
-    Preis numeric(10,2)  NOT NULL
+CREATE TABLE Position (
+    BestellungID NUMERIC(19,0)NOT NULL,
+    PosID NUMERIC(19,0)NOT NULL,
+    ProduktID NUMERIC(10,0)NOT NULL,
+    SpezLieferAdrID NUMERIC(10,0)NULL,
+    Menge NUMERIC(10,0)NOT NULL,
+    Preis NUMERIC(10,2) NOT NULL
 );
 
-CREATE TABLE willibald_shop_p1.Lieferung (
-    BestellungID bigint  NOT NULL ,
-    PosID bigint  NOT NULL ,
-    LieferAdrID int  NOT NULL ,
-    LieferDienstID varchar(30)  NOT NULL ,
-    LieferDatum date  NOT NULL
+CREATE TABLE Lieferung (
+    BestellungID NUMERIC(19,0)NOT NULL,
+    PosID NUMERIC(19,0)NOT NULL,
+    LieferAdrID NUMERIC(10,0)NOT NULL,
+    LieferDienstID VARCHAR(30) NOT NULL,
+    LieferDatum DATE NOT NULL
 );
 
-CREATE TABLE willibald_shop_p1.LieferDienst (
-    LieferDienstID varchar(30)  NOT NULL ,
-    Name varchar(128)  NOT NULL ,
-    Telefon varchar(20)  NOT NULL ,
-    Fax varchar(20)  NULL ,
-    Email varchar(128)  NOT NULL ,
-    Strasse varchar(128)  NOT NULL ,
-    Hausnummer varchar(10)  NOT NULL ,
-    Plz varchar(10)  NOT NULL ,
-    Ort varchar(128)  NOT NULL ,
-    Land varchar(128)  NULL
+CREATE TABLE LieferDienst (
+    LieferDienstID VARCHAR(30) NOT NULL,
+    Name VARCHAR(128) NOT NULL,
+    Telefon VARCHAR(20) NOT NULL,
+    Fax VARCHAR(20) NULL,
+    Email VARCHAR(128) NOT NULL,
+    Strasse VARCHAR(128) NOT NULL,
+    Hausnummer VARCHAR(10) NOT NULL,
+    Plz VARCHAR(10) NOT NULL,
+    Ort VARCHAR(128) NOT NULL,
+    Land VARCHAR(128) NULL
 );
+
+--COMMIT TRANSACTION QUICKDBD;
